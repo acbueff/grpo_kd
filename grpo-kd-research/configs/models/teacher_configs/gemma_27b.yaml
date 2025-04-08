@@ -1,0 +1,45 @@
+# Configuration for GEMMA 27B teacher model
+
+model_name: "google/gemma-27b-it"
+
+# Model configuration
+model_config:
+  architectures: ["GemmaForCausalLM"]
+  model_type: "gemma"
+  torch_dtype: "bfloat16"
+  pad_token_id: 0
+  hidden_act: "gelu"
+  hidden_size: 8192
+  intermediate_size: 28672
+  num_attention_heads: 64
+  num_hidden_layers: 36
+  num_key_value_heads: 8
+  rms_norm_eps: 1.0e-06
+  rope_theta: 10000.0
+  vocab_size: 256000
+
+# Loading configuration
+loading:
+  device_map: "auto"  # Automatically map to available devices
+  low_cpu_mem_usage: true
+  load_in_8bit: true  # Use 8-bit quantization to save memory
+  load_in_4bit: false
+  offload_folder: "offload"
+  torch_dtype: "bfloat16"
+  use_cache: true
+
+# Inference configuration
+inference:
+  max_length: 2048
+  max_new_tokens: 512
+  temperature: 1.0
+  do_sample: false
+  num_beams: 1
+  use_flash_attention: true
+
+# Teacher parameters
+teacher:
+  softmax_temperature: 1.0  # Temperature for computing log probabilities
+  sequence_level_scoring: true  # Score entire sequences, not individual tokens
+  top_k: 0  # No top-k filtering when computing scores
+  optimize_memory: true  # Use memory-efficient approach for large model 

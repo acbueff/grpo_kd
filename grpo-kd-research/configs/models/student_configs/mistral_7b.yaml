@@ -1,0 +1,71 @@
+# Configuration for Mistral 7B model with Faroese adaptations
+
+model_name: "mistralai/Mistral-7B-v0.1"
+
+# Model configuration
+model_config:
+  architectures: ["MistralForCausalLM"]
+  model_type: "mistral"
+  vocab_size: 32000  # Extended for Faroese special tokens
+  hidden_size: 4096
+  intermediate_size: 14336
+  num_hidden_layers: 32
+  num_attention_heads: 32
+  num_key_value_heads: 8
+  hidden_act: "silu"
+  max_position_embeddings: 32768
+  rms_norm_eps: 1.0e-05
+  rope_theta: 10000.0
+  sliding_window: 4096
+  tie_word_embeddings: false
+  pad_token_id: 0
+  bos_token_id: 1
+  eos_token_id: 2
+
+# Training configuration
+training:
+  lora:
+    enabled: true
+    r: 16
+    alpha: 32
+    dropout: 0.05
+    target_modules: ["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"]
+    bias: "none"
+  
+  gradient_checkpointing: true
+  load_in_8bit: false
+  load_in_4bit: true
+  use_flash_attention: true
+
+# Generation configuration
+generation:
+  do_sample: true
+  temperature: 0.7
+  top_p: 0.9
+  top_k: 50
+  max_new_tokens: 512
+  repetition_penalty: 1.1
+  no_repeat_ngram_size: 5
+
+# Faroese-specific adaptations
+faroese:
+  add_special_tokens: true
+  use_prefix: false
+  faroese_prefix: "🇫🇴 "
+  faroese_chars: "ðøáíóúýæÐØÁÍÓÚÝÆ"
+  special_tokens:
+    - "føroysk"
+    - "Føroyar"
+    - "Tórshavn"
+    - "oyggj"
+    - "fjørð"
+    - "bygd"
+    - "býur"
+    - "fjall"
+    - "dalur"
+    - "vík"
+    - "maður"
+    - "kona"
+    - "barn"
+    - "skip"
+    - "bátur" 

@@ -1,60 +1,20 @@
-# GRPO-KD: Group Relative Policy Optimization with Knowledge Distillation for Faroese Language Models
+# GRPO-KD Research Project
 
-## Project Overview
+## Overview
 
-This research project focuses on enhancing smaller language models for the Faroese language using Group Relative Policy Optimization (GRPO) combined with Knowledge Distillation (KD) techniques. The goal is to create more efficient and effective language models while preserving language-specific capabilities.
+This repository contains the code and resources for the research project on integrating Group Relative Policy Optimization (GRPO) with Knowledge Distillation (KD) techniques for training a Faroese language model.
 
-## Key Features
+Refer to `CONTEXT.md` for a detailed description of the research goals, algorithms, and constraints.
+Refer to `Struc_GRPO_KD.md` for the project's directory structure.
 
-- Implementation of GRPO with Knowledge Distillation rewards
-- Support for multiple student and teacher model architectures
-- Specialized training for Faroese language understanding
-- Comprehensive evaluation on Faroese language benchmarks
-- HPC/SLURM integration for distributed training
+## Installation
 
-## Project Structure
-
-```
-grpo-kd-research/
-├── data/               # Datasets and benchmarks
-├── src/               # Source code implementation
-├── configs/           # Configuration files
-├── scripts/           # Utility and SLURM scripts
-├── experiments/       # Experiment tracking
-├── results/           # Results and model checkpoints
-├── notebooks/         # Analysis notebooks
-└── docs/             # Documentation
-```
-
-## Getting Started
-
-### Prerequisites
-
-- Python 3.8+
-- PyTorch 2.0+
-- Transformers library
-- SLURM environment for distributed training
-
-### Installation
-
-```bash
-# Clone the repository
-git clone [repository-url]
-cd grpo-kd-research
-
-# Install dependencies (to be added)
-pip install -r requirements.txt
-```
+(Instructions TBD)
 
 ## Usage
 
-Detailed usage instructions will be added as the project develops.
+(Instructions TBD)
 
-## License
+## Contributing
 
-This project is part of academic research at [Institution Name].
-
-## Acknowledgments
-
-- Research supported by [funding/institution details]
-- Based on GRPO and MiniLLM methodologies 
+(Guidelines TBD) 

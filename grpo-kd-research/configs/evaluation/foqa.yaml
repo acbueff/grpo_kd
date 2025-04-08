@@ -1,0 +1,48 @@
+# Configuration for Faroese Question Answering (FoQA) evaluation
+
+dataset:
+  name: "foqa"
+  path: "data/evaluation/foqa.jsonl"
+  question_field: "question"
+  answer_field: "answer"
+  context_field: "context"
+  split: "test"
+  max_samples: 500  # Number of samples to evaluate on
+
+metrics:
+  - name: "foqa"
+    weight: 1.0
+  - name: "bleu"
+    weight: 0.5
+  - name: "exact_match"
+    weight: 0.3
+  - name: "faroese_linguistic"
+    weight: 0.2
+
+generation:
+  max_new_tokens: 256
+  do_sample: false
+  temperature: 1.0
+  top_p: 1.0
+  num_beams: 4
+  repetition_penalty: 1.1
+
+evaluation:
+  batch_size: 16
+  num_workers: 4
+  device: "cuda"
+  verbose: true
+  output_file: "results/foqa_results.json"
+  save_predictions: true
+  prediction_file: "results/foqa_predictions.jsonl"
+
+prompting:
+  # Prompt template for FoQA evaluation
+  template: |
+    Spurningur á føroyskum:
+    {question}
+
+    Vinarliga svar spurningin á føroyskum. Ger tað stuttligt og neyvt.
+
+    Svar:
+  system_prompt: "Tú ert ein hjálpsamur, nágreiniligur og sannferðiligur aðstoðari, sum svarar føroyskum spurningum." 

@@ -1,0 +1,107 @@
+# Configuration for PPO with Teacher Log-Likelihood Reward
+
+# Training parameters
+training:
+  epochs: 3
+  max_steps: 20000
+  save_interval: 500
+  eval_interval: 100
+  log_interval: 10
+  seed: 42
+  
+  # Optimization
+  learning_rate: 5e-6
+  lr_scheduler_type: cosine
+  warmup_ratio: 0.03
+  weight_decay: 0.01
+  gradient_accumulation_steps: 4
+  max_grad_norm: 1.0
+  
+  # Mixed precision
+  fp16: true
+  bf16: false
+  
+  # Checkpointing
+  resume_from_checkpoint: null
+  save_total_limit: 3
+  
+# PPO specific parameters
+ppo:
+  clip_param: 0.2
+  value_loss_coef: 0.5
+  entropy_coef: 0.01
+  gamma: 0.99
+  gae_lambda: 0.95
+  update_epochs: 4
+  target_kl: 0.015
+
+# Model configuration
+model:
+  # Student model (policy)
+  student:
+    name: mistral-7b-v0.1
+    model_type: causal_lm
+    load_in_8bit: false
+    gradient_checkpointing: true
+  
+  # Value model (critic)
+  value:
+    shared_backbone: true  # If true, use the same backbone as policy with different head
+    name: mistral-7b-v0.1
+    model_type: causal_lm
+    load_in_8bit: false
+    gradient_checkpointing: true
+    
+  # Teacher model
+  teacher:
+    name: gemma-27b
+    model_type: causal_lm
+    load_in_8bit: true
+    device: cuda
+    
+  # Tokenizer
+  tokenizer:
+    add_faroese_tokens: true
+    max_length: 2048
+    padding_side: right
+
+# Reward configuration
+reward:
+  type: teacher_logprob
+  normalize: true
+  sequence_level: true
+  temperature: 1.0
+
+# Data configuration
+data:
+  train_file: data/faroese/train.jsonl
+  eval_file: data/faroese/eval.jsonl
+  prompt_column: prompt
+  response_column: response
+  
+  # Batch sizes
+  per_device_train_batch_size: 2
+  per_device_eval_batch_size: 4
+  
+  # Preprocessing
+  preprocessing:
+    use_faroese_preprocessing: true
+    max_length: 2048
+    
+# Evaluation
+evaluation:
+  metrics:
+    - foqa
+    - perplexity
+    - bleu
+  generation_config:
+    max_new_tokens: 256
+    do_sample: true
+    temperature: 0.7
+    top_p: 0.9
+    
+# Logging
+logging:
+  report_to: ["tensorboard", "wandb"]
+  wandb_project: ppo-faroese-kd
+  wandb_run_name: ppo_teacher_ll_run 
