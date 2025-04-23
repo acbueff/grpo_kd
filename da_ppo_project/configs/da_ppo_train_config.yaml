@@ -1,0 +1,92 @@
+# Model Configuration
+student_model_name: &student_model "gpt2" # Example: "meta-llama/Llama-2-7b-hf"
+teacher_model_name: &teacher_model "gpt2-medium" # Example: "meta-llama/Llama-2-13b-hf" or API access logic
+use_lora: true # Use LoRA for student model fine-tuning
+lora_config:
+  r: 16
+  lora_alpha: 32
+  lora_dropout: 0.05
+  bias: "none"
+  task_type: "CAUSAL_LM"
+
+# Dataset Configuration
+dataset_name: "lvwerra/stack-exchange-paired" # Dataset for prompts
+prompt_column: "question" # Column containing the prompts
+max_prompt_length: 512 # Max length for prompts
+
+# PPO Configuration (trl.PPOConfig)
+ppo_config:
+  model_name: *student_model
+  learning_rate: 1.41e-5
+  log_with: "wandb" # or None or "tensorboard"
+  batch_size: 64
+  mini_batch_size: 4 # Should divide batch_size
+  gradient_accumulation_steps: 4 # batch_size = mini_batch_size * gradient_accumulation_steps
+  optimize_cuda_cache: true
+  early_stopping: false
+  target_kl: 6.0 # Target KL divergence
+  ppo_epochs: 4 # Number of optimisation epochs per batch of samples
+  seed: 42
+  init_kl_coef: 0.2
+  adap_kl_ctrl: true
+
+# DA-PPO Specific Configuration
+da_reward_type: "log_likelihood" # Options: "log_likelihood", "kl_divergence", "reward_model"
+lambda_da: 0.8 # Weight for the distillation reward (intrinsic reward weight = 1 - lambda_da)
+intrinsic_reward_weight: 0.2 # Explicit weight for non-DA reward (set to 0 if DA is the only reward)
+
+# Generation Configuration
+generation_kwargs:
+  max_new_tokens: 128
+  min_length: -1 # do not override the model config
+  top_k: 0
+  top_p: 1.0
+  do_sample: true
+  pad_token_id: 50256 # Specify the pad token id for the student model tokenizer
+  temperature: 0.9
+
+# Training Configuration
+num_train_epochs: 1 # Or training steps
+max_steps: -1 # Overrides epochs if > 0
+save_steps: 100 # Save model every N steps
+logging_steps: 10 # Log metrics every N steps
+output_dir: "models/da_ppo_student" # Base directory to save models
+project_name: "da-ppo-research" # WandB project name
+
+# Evaluation Configuration (used by evaluate_models.py)
+evaluation_datasets:
+  # - name: "alpaca_eval_subset" # Example subset for creative/instruct
+  #   path: "tatsu-lab/alpaca_eval"
+  #   prompt_col: "instruction"
+  #   split: "eval"
+  #   subset_size: 50
+  - name: "truthful_qa_gen"
+    path: "truthful_qa"
+    config_name: "generation"
+    prompt_col: "question"
+    split: "validation"
+    subset_size: 50 # Take a subset for faster eval
+  # - name: "humaneval"
+  #   path: "openai_humaneval"
+  #   prompt_col: "prompt"
+  #   split: "test"
+  #   subset_size: 50
+  - name: "gsm8k_main"
+    path: "gsm8k"
+    config_name: "main"
+    prompt_col: "question"
+    split: "test"
+    subset_size: 50
+
+evaluation_metrics:
+  - "accuracy" # For QA/Math/Code
+  - "rouge" # For text generation (needs references or use vs teacher?)
+  # - "bleu"
+  - "perplexity" # Needs baseline model
+  # - "grammatical_error_rate" # Needs language_tool_python
+
+eval_batch_size: 8
+
+# Statistical Analysis Configuration
+num_runs: 3 # Number of independent training runs for statistical significance
+significance_level: 0.05

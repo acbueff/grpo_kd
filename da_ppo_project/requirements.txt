@@ -1,0 +1,13 @@
+torch
+transformers>=4.30.0
+trl>=0.8.6
+datasets>=2.10.0
+evaluate>=0.4.0
+accelerate>=0.20.0
+peft>=0.7.0
+scipy
+numpy
+pyyaml
+tqdm
+wandb # Optional, for logging
+# language_tool_python # Optional, for GER metric - requires Java
