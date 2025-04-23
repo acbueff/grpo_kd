@@ -339,7 +339,7 @@ def main(config_path: str, training_mode: str, run_seed: Optional[int] = None):
             # Ensure logging happens only on the main process
             if ppo_trainer.accelerator.is_main_process:
                 if stats: # Log only if step was successful
-                    stats_to_log = {k: v if isinstance(v, (int, float)) else v.mean().item() for k, v in stats.items() if torch.is_tensor(v) or isinstance(v, (int, float))}\
+                    stats_to_log = {k: v if isinstance(v, (int, float)) else v.mean().item() for k, v in stats.items() if torch.is_tensor(v) or isinstance(v, (int, float))}
                     stats_to_log["reward/mean"] = torch.stack(rewards_tensors).mean().item()
                     stats_to_log["reward/std"] = torch.stack(rewards_tensors).std().item()
                     # Use ppo_trainer.log_stats for proper handling with accelerator and logging integrations
