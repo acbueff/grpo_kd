@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold">Compliance-Performance Tradeoff</text>
+  
+  <!-- Axes -->
+  <line x1="100" y1="400" x2="700" y2="400" stroke="#333" stroke-width="2"/> <!-- x-axis -->
+  <line x1="100" y1="400" x2="100" y2="100" stroke="#333" stroke-width="2"/> <!-- y-axis -->
+  
+  <!-- Axis labels -->
+  <text x="400" y="440" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold">Compliance Level</text>
+  <text x="60" y="280" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" transform="rotate(-90, 60, 250)" font-weight="bold">Performance</text>
+  
+  <!-- X-axis labels -->
+  <text x="150" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">High</text>
+  <text x="400" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Medium</text>
+  <text x="650" y="425" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">Low</text>
+  
+  <!-- Y-axis labels -->
+  <text x="80" y="360" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Low</text>
+  <text x="80" y="250" font-family="Arial, sans-serif" font-size="14" text-anchor="end">Medium</text>
+  <text x="80" y="140" font-family="Arial, sans-serif" font-size="14" text-anchor="end">High</text>
+  
+  <!-- Uncertainty band -->
+  <path d="M150,300 Q275,260 400,225 Q525,190 650,150" 
+        fill="#e6f3ff" stroke="none" opacity="0.4"/>
+  <path d="M150,340 Q275,300 400,265 Q525,230 650,190" 
+        fill="#e6f3ff" stroke="none" opacity="0.4"/>
+  
+  <!-- Performance trend lines for different tasks -->
+  <!-- General knowledge tasks -->
+  <path d="M150,300 Q275,260 400,225 Q525,190 650,150" 
+        fill="none" stroke="#1e88e5" stroke-width="3"/>
+  <text x="670" y="150" font-family="Arial, sans-serif" font-size="12" text-anchor="start">General Knowledge</text>
+  
+  <!-- Safety/alignment tasks -->
+  <path d="M150,180 Q275,200 400,230 Q525,260 650,290" 
+        fill="none" stroke="#d81b60" stroke-width="3"/>
+  <text x="670" y="290" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Safety/Alignment</text>
+  
+  <!-- Coding tasks -->
+  <path d="M150,260 Q275,235 400,210 Q525,185 650,160" 
+        fill="none" stroke="#43a047" stroke-width="3"/>
+  <text x="670" y="170" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Coding</text>
+  
+  <!-- Model checkpoints -->
+  <circle cx="150" cy="240" r="10" fill="#7ac142" stroke="#333" stroke-width="2"/>
+  <text x="150" y="220" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Model-HC</text>
+  
+  <circle cx="400" cy="220" r="10" fill="#ffc845" stroke="#333" stroke-width="2"/>
+  <text x="400" y="200" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Model-MC</text>
+  
+  <circle cx="650" cy="180" r="10" fill="#ff6b45" stroke="#333" stroke-width="2"/>
+  <text x="650" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Model-LC</text>
+  
+  <!-- Key Findings Box -->
+  <rect x="100" y="450" width="600" height="40" rx="5" ry="5" fill="#f0f0f0" stroke="#333" stroke-width="1"/>
+  <text x="400" y="475" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-style="italic">
+    de la Rosa  et al. (2025): Less compliant data improved model performance by +6.7% on average
+  </text>
+  
+  <!-- Legend -->
+  <rect x="550" y="330" width="200" height="70" rx="5" ry="5" fill="white" stroke="#333" stroke-width="1"/>
+  <line x1="560" y1="345" x2="580" y2="345" stroke="#1e88e5" stroke-width="3"/>
+  <text x="585" y="350" font-family="Arial, sans-serif" font-size="12">General Knowledge</text>
+  <line x1="560" y1="365" x2="580" y2="365" stroke="#d81b60" stroke-width="3"/>
+  <text x="585" y="370" font-family="Arial, sans-serif" font-size="12">Safety/Alignment</text>
+  <line x1="560" y1="385" x2="580" y2="385" stroke="#43a047" stroke-width="3"/>
+  <text x="585" y="390" font-family="Arial, sans-serif" font-size="12">Coding</text>
+</svg>

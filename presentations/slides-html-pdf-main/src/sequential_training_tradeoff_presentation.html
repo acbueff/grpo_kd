@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sequential Training for Compliance-Performance Tradeoffs</title>
+    <link rel="stylesheet" href="assets/styles/base.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .slide {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 40px;
+            display: flex; /* Use flexbox for centering */
+            flex-direction: column; /* Stack title and content vertically */
+            justify-content: center; /* Center vertically */
+        }
+        .slide h1 {
+            font-size: 3em;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .slide h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px; /* More space below title */
+            text-align: center; /* Center title */
+            flex-shrink: 0; /* Prevent title from shrinking */
+        }
+        .slide h3 {
+            font-size: 1.8em;
+            margin-bottom: 15px;
+            font-weight: 500;
+            text-align: center;
+        }
+        .slide ul {
+            font-size: 1.25em; /* Slightly larger text */
+            margin-left: 50px; /* Indent list */
+            max-width: 90%; /* Prevent text from hitting edges */
+            margin: 0 auto; /* Center list block */
+        }
+        .slide ul li {
+            margin-bottom: 18px; /* More space between items */
+        }
+        .slide-content {
+            max-width: 95%; /* Allow slightly wider content */
+            margin: 0 auto;
+            flex-grow: 1; /* Allow content to fill space */
+            display: flex; /* Use flex for content layout */
+            flex-direction: column;
+            justify-content: center; /* Center content vertically */
+        }
+        .slide img {
+            max-width: 90%; /* Limit image width */
+            max-height: 550px; /* Limit image height */
+            display: block;
+            margin: 20px auto; /* Center image */
+            object-fit: contain; /* Ensure image fits without distortion */
+        }
+        .slide .image-container {
+             flex-grow: 1;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             width: 100%;
+        }
+        .slide .text-summary {
+             max-width: 1000px; /* Limit width of text summaries */
+             margin: 0 auto; /* Center text block */
+             padding: 20px;
+        }
+        /* Background Styles (reused from other presentation) */
+        .slide-blue { background: linear-gradient(135deg, #2193b0, #6dd5ed); color: white; }
+        .slide-dark { background: linear-gradient(135deg, #1a2a6c, #b21f1f); color: white; }
+        .slide-green { background: linear-gradient(135deg, #134e5e, #71b280); color: white; }
+        .slide-orange { background: linear-gradient(135deg, #e65c00, #f9d423); color: white; }
+        .slide-purple { background: linear-gradient(135deg, #6a3093, #a044ff); color: white; }
+        .slide-grey { background: linear-gradient(135deg, #3C3B3F, #605C3C); color: white; }
+        .slide-teal { background: linear-gradient(135deg, #1D4350, #A43931); color: white; }
+         .slide-navy { background: linear-gradient(135deg, #0F2027, #203A43, #2C5364); color: white; }
+         .slide-red { background: linear-gradient(135deg, #4A569D, #DC2424); color: white; }
+         .slide-blue-dark { background: linear-gradient(135deg, #1e3c72, #2a5298); color: white; }
+         .slide-blue-green { background: linear-gradient(135deg, #1a2980, #26d0ce); color: white; }
+
+        .slide code {
+            background-color: rgba(0, 0, 0, 0.2);
+            padding: 0.2em 0.4em;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        .slide strong {
+            font-weight: 700;
+            color: #ffdd57; /* Highlight color */
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 0: Title Slide -->
+<div class="slide slide-blue-dark" id="slide-0">
+    <div class="slide-content">
+        <h1>Evaluating Sequential Data Scheduling for Compliance-Performance Tradeoffs</h1>
+        <h3>Analysis of a 100B Parameter LLM Training Plan</h3>
+    </div>
+</div>
+
+<!-- Slide 1: main Proposed Sequential Training Flow (Image) -->
+<div class="slide slide-blue" id="slide-1">
+    <h2>Main Proposal: Sequential Training Flow</h2>
+    <div class="image-container">
+        <img src="../sequential_training_tradeoff_250428/sequential-training-flow.svg" alt="Sequential Training Flow Diagram">
+    </div>
+</div>
+
+<!-- Slide 2: Summary of Main Proposal (Text) -->
+<div class="slide slide-blue" id="slide-2">
+    <h2>Sequential Training Proposal: Summary</h2>
+    <div class="text-summary">
+        <ul>
+            <li><strong>Goal:</strong> Study compliance-performance tradeoff for a 100B LLM within a 2.5T token budget.</li>
+            <li><strong>Method:</strong> Sequential training across three data tiers:
+                <ol>
+                    <li>High Compliance (HC: 100% filtered)</li>
+                    <li>Medium Compliance (MC: ~50% filtered)</li>
+                    <li>Low Compliance (LC: minimally filtered)</li>
+                </ol>
+            </li>
+            <li><strong>Checkpoints:</strong> Save intermediate models (Model-HC, Model-MC, Model-LC) after each stage.</li>
+            <li><strong>Core Question:</strong> How does relaxing data filtering affect model performance and capabilities?</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 3: Scientific Challenges of Sequential Design (Text) -->
+<div class="slide slide-dark" id="slide-3">
+    <h2>Scientific Rigor Challenges</h2>
+     <div class="text-summary">
+        <ul>
+            <li><strong>Confounding by Training Time:</strong> Later stages (MC, LC) receive more cumulative training tokens/steps than earlier stages (HC).</li>
+            <li>Performance differences (e.g., Model-LC vs. Model-HC) could be due to <strong>more compute</strong>, not just the change in data compliance level.</li>
+            <li>Makes attributing performance changes <strong>solely to data compliance difficult</strong>. Causal claims are risky without controls.</li>
+            <li>Need for mitigation: baselines (uniform mix), ablations, or alternative designs to isolate data effects.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 4: Alternative Experimental Designs (Image) -->
+<div class="slide slide-green" id="slide-4">
+    <h2>Alternative Experimental Designs</h2>
+     <div class="image-container">
+        <img src="../sequential_training_tradeoff_250428/experimental-design-comparison.svg" alt="Experimental Design Comparison Matrix">
+    </div>
+</div>
+
+<!-- Slide 5: Summary of Alternative Designs (Text) -->
+<div class="slide slide-green" id="slide-5">
+    <h2>Alternative Designs: Summary</h2>
+    <div class="text-summary">
+        <ul>
+            <li><strong>A. Independent Small Models (e.g., 3B):</strong> Train separate small models per compliance level.
+                <ul><li>(+) High data isolation, potentially lower compute per model.</li><li>(-) Scaling differences; may not predict 100B behavior.</li></ul>
+            </li>
+            <li><strong>B. Shared Foundation + Divergence:</strong> Train base on HC, then fork and continue train copies on HC, MC, LC separately.
+                <ul><li>(+) Controls for compute & initial state; high data isolation post-fork.</li><li>(-) High total compute cost (e.g., 3x budget if each branch gets 2.5T tokens). Under-training risk if budget split.</li></ul>
+            </li>
+             <li><strong>C. Uniform Mixture Baseline:</strong> Train one model on a shuffled mix of all data.
+                <ul><li>(+) Simple, provides direct comparison for sequential scheduling effect.</li><li>(-) Doesn't isolate specific compliance level effects.</li></ul>
+            </li>
+             <li><strong>Tradeoffs:</strong> Alternatives offer better scientific control but face compute/scaling challenges. Sequential design maximizes compute on one model but confounds variables.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 6: The Compliance-Performance Tradeoff (Image) -->
+<div class="slide slide-red" id="slide-6">
+    <h2>The Core Tradeoff: Compliance vs. Performance</h2>
+     <div class="image-container">
+        <img src="../sequential_training_tradeoff_250428/compliance-performance-tradeoff.svg" alt="Compliance-Performance Tradeoff Graph">
+    </div>
+</div>
+
+<!-- Slide 7: Summary of Compliance-Performance Tradeoff (Text) -->
+<div class="slide slide-red" id="slide-7">
+    <h2>Compliance-Performance Tradeoff: Summary</h2>
+    <div class="text-summary">
+        <ul>
+            <li><strong>Hypothesis:</strong> There's an inherent tradeoff between strict data compliance (filtering) and raw model performance/capabilities.</li>
+            <li><strong>Evidence (de la Rosa  et al. 2025):</strong> Including high-quality copyrighted (less compliant) data significantly improved a 7B model's performance (+6.7%). Conversely, overly filtered/specific data (fiction) slightly hurt general performance (-1.4%).</li>
+            <li><strong>Implication:</strong> Less filtered (LC) data likely boosts performance metrics (knowledge, perplexity) but may reduce safety/alignment. Highly filtered (HC) data may yield safer but less capable models.</li>
+            <li>The experiment aims to quantify this relationship for the 100B model.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 8: Data Quality Differences Across Tiers (Text) -->
+<div class="slide slide-teal" id="slide-8">
+    <h2>Data Quality Across Compliance Tiers</h2>
+    <div class="text-summary">
+        <ul>
+            <li><strong>High Compliance (HC):</strong> Strictly filtered. Safe, potentially biased (e.g., formal, Western sources), less diverse, risk of informational paucity.</li>
+            <li><strong>Medium Compliance (MC):</strong> Moderately filtered. Mix of quality, broader domains (forums, some code), improved capability expected, mild safety risk increase.</li>
+            <li><strong>Low Compliance (LC):</strong> Minimally filtered. Richest data (web text, copyrighted material), likely maximizes raw performance but introduces safety/bias/ethical risks.</li>
+            <li><strong>Challenge:</strong> Compliance levels likely correlate with other data differences (domain, style, quality). Changes in model performance might stem from these factors, not just filtering rules. Careful data characterization is needed.</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- Slide 9: Curriculum Learning vs. Uniform Sampling (Image) -->
+<div class="slide slide-blue-green" id="slide-9">
+    <h2>Curriculum Learning: Sequential vs. Uniform</h2>
+     <div class="image-container">
+        <img src="../sequential_training_tradeoff_250428/curriculum-vs-uniform.svg" alt="Curriculum vs. Uniform Training Comparison">
+    </div>
+</div>
+
+<!-- Slide 10: Summary of Curriculum Learning Findings (Text) -->
+<div class="slide slide-blue-green" id="slide-10">
+    <h2>Curriculum Learning: Evidence & Implications</h2>
+    <div class="text-summary">
+        <ul>
+            <li><strong>Sequential training (HC→MC→LC) is a form of curriculum learning.</strong></li>
+            <li><strong>Evidence (Schaefer et al. 2024):</strong> Studied language scheduling in multilingual models.
+                <ul>
+                    <li>Controlled (cloned language) setting: Imbalanced schedule helped under-represented language.</li>
+                    <li>Real languages: Gains inconsistent; <strong>uniform mixing often performed best overall.</strong> Schedules could create performance tradeoffs between languages.</li>
+                </ul>
+            </li>
+            <li><strong>Implication for Compliance:</strong> The proposed HC→MC→LC sequence might not outperform a uniform mix. It could tilt performance (e.g., better initial safety, better final capability) but potentially at a cost to overall balance.</li>
+            <li><strong>Recommendation:</strong> Benchmark sequential approach against a uniform mixture baseline.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 11: Training Token Allocation (Image) -->
+<div class="slide slide-purple" id="slide-11">
+    <h2>Training Token Allocation</h2>
+    <div class="image-container">
+        <img src="../sequential_training_tradeoff_250428/token-allocation-sankey.svg" alt="Token Allocation Sankey Diagram">
+    </div>
+</div>
+
+<!-- Slide 12: Implications of Token Allocation (Text) -->
+<div class="slide slide-purple" id="slide-12">
+    <h2>Token Allocation: Implications</h2>
+    <div class="text-summary">
+        <ul>
+            <li>The Sankey diagram visually confirms the <strong>cumulative token effect</strong> in the sequential design.</li>
+            <li>Model-HC sees only the initial tranche of tokens (e.g., ~0.83T if split evenly per stage).</li>
+            <li>Model-MC sees tokens from stage 1 + stage 2 (e.g., ~1.67T total).</li>
+            <li>Model-LC sees all 2.5T tokens across all stages.</li>
+            <li>This reinforces the <strong>confounding factor:</strong> Comparing Model-HC, MC, and LC directly compares models trained on different total amounts of data.</li>
+            <li>Model-HC will likely be significantly <strong>under-trained</strong> for a 100B model compared to Model-LC. Evaluating intermediate checkpoints requires careful interpretation.</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- Slide 13: Scaling Law Considerations (Image) -->
+<div class="slide slide-orange" id="slide-13">
+    <h2>Scaling Law Considerations: 100B Model, 2.5T Tokens</h2>
+     <div class="image-container">
+        <img src="../sequential_training_tradeoff_250428/chinchilla-scaling-law.svg" alt="Chinchilla Scaling Law Visualization">
+    </div>
+</div>
+
+<!-- Slide 14: Summary of Scaling Laws & Budget Adequacy (Text) -->
+<div class="slide slide-orange" id="slide-14">
+    <h2>Scaling Laws & Budget: Is 2.5T Tokens Enough?</h2>
+    <div class="text-summary">
+        <ul>
+            <li><strong>Chinchilla Scaling Law Guideline:</strong> Optimal training involves ~20 tokens per model parameter.</li>
+            <li>For a 100B parameter model, this suggests an optimal data size around <strong>~2.0 Trillion tokens</strong>.</li>
+            <li><strong>Budget Analysis:</strong> The allocated 2.5T tokens is slightly <strong>above the Chinchilla optimal point.</strong></li>
+            <li><strong>Conclusion:</strong> 2.5T tokens should be sufficient to train the 100B model effectively, avoiding under-training (unlike many previous large models). Performance should be good, assuming efficient training.</li>
+            <li><strong>Efficiency is Key:</strong> Need stable training. Consider advanced optimizers (e.g., SCION [cite: 2502.07529v1]) for hyperparameter transfer and large batch stability.</li>
+        </ul>
+    </div>
+</div>
+
+
+<!-- Slide 15: Compromise Approaches (Image) -->
+<div class="slide slide-navy" id="slide-15">
+    <h2>Finding a Balance: Compromise Approaches</h2>
+     <div class="image-container">
+        <img src="../sequential_training_tradeoff_250428/compromise-decision-tree.svg" alt="Compromise Solution Decision Tree">
+    </div>
+</div>
+
+<!-- Slide 16: Summary of Compromise Approaches (Text) -->
+<div class="slide slide-navy" id="slide-16">
+    <h2>Compromise Approaches: Summary</h2>
+    <div class="text-summary">
+        <ul>
+            <li><strong>Goal:</strong> Balance scientific rigor with engineering goals and budget constraints.</li>
+            <li><strong>Recommendations:</strong>
+                <ul>
+                    <li><strong>Pilot Study:</strong> Test sequential vs. alternatives on smaller models (e.g., 3B or 10B) first.</li>
+                    <li><strong>Incorporate Mixing:</strong> Instead of hard stages, use overlapping phases or gradually introduce MC/LC data into the mix.</li>
+                    <li><strong>Reset Optimizer States:</strong> Consider resetting optimizer or LR schedule at transitions to make stages more distinct.</li>
+                    <li><strong>Leverage Advanced Optimizers:</strong> Use SCION [cite: 2502.07529v1] for stability and efficient hyperparameter tuning.</li>
+                    <li><strong>Continuous Evaluation:</strong> Monitor performance/compliance throughout; consider early stopping or safety fine-tuning.</li>
+                    <li><strong>Thorough Documentation:</strong> Detail data composition at each stage.</li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 17: Data Mixing Approaches Comparison (Image) -->
+<div class="slide slide-teal" id="slide-17">
+    <h2>Comparing Data Mixing Strategies</h2>
+     <div class="image-container">
+        <img src="../sequential_training_tradeoff_250428/mixing-approaches-comparison.svg" alt="Comparison of Data Mixing Approaches">
+    </div>
+</div>
+
+<!-- Slide 18: Summary of Data Mixing Approaches (Text) -->
+<div class="slide slide-teal" id="slide-18">
+    <h2>Data Mixing Strategies: Summary</h2>
+    <div class="text-summary">
+        <ul>
+            <li><strong>Sequential Approach:</strong> Distinct stages (HC -> MC -> LC) with sharp boundaries. Simple but risks model shock at transitions and confounds data type with training duration.</li>
+            <li><strong>Graduated Mixing (Compromise):</strong> Smoother transitions between data types (e.g., pure HC, then gradual HC->MC mix, then gradual MC->LC mix). Reduces potential for catastrophic forgetting and offers a more natural curriculum. Aligns with compromise recommendations.</li>
+            <li><strong>Uniform Mixture (Baseline):</strong> Mix all data (HC, MC, LC) uniformly throughout training. Serves as a critical baseline to evaluate whether sequential or graduated mixing provides actual benefits over simple mixing.</li>
+        </ul>
+    </div>
+</div>
+
+<!-- Slide 19: Conclusion -->
+<div class="slide slide-grey" id="slide-19">
+    <h2>Conclusion & Next Steps</h2>
+     <div class="text-summary">
+        <ul>
+            <li>The Sequential Training proposal addresses a critical question about compliance-performance tradeoffs.</li>
+            <li>The sequential design is practical but faces scientific challenges (confounding variables).</li>
+            <li>Alternatives offer rigor but have higher costs or scaling issues.</li>
+            <li>The 2.5T token budget is adequate for the 100B model based on scaling laws.</li>
+            <li><strong>Recommendation:</strong> Proceed with the 100B training, but incorporate elements to improve scientific validity:
+                <ul>
+                    <li>Run a <strong>uniform mixture baseline</strong> alongside (perhaps smaller scale if budget limited).</li>
+                    <li>Consider <strong>smoother transitions</strong> (mixing) instead of hard stages.</li>
+                    <li>Utilize <strong>advanced optimizers</strong> and <strong>continuous evaluation</strong>.</li>
+                    <li>Conduct a <strong>small-scale pilot</strong> if feasible to de-risk the design.</li>
+                </ul>
+            </li>
+            <li>This balanced approach maximizes learning from the available compute budget.</li>
+        </ul>
+    </div>
+</div>
+
+</body>
+</html> 

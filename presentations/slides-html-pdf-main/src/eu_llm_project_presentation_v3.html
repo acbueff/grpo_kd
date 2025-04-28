@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>EU LLM Training Project - Integrated Presentation</title>
+    <link rel="stylesheet" href="assets/styles/base.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .slide {
+            width: 1280px;
+            height: 720px;
+            position: relative;
+            overflow: hidden;
+            box-sizing: border-box;
+            padding: 40px;
+        }
+        .slide h1 {
+            font-size: 2.5em;
+            margin-bottom: 20px;
+        }
+        .slide h2 {
+            font-size: 2em;
+            margin-bottom: 20px;
+        }
+        .slide h3 {
+            font-size: 1.5em;
+            margin-bottom: 15px;
+        }
+        .slide ul {
+            font-size: 1.2em;
+            margin-left: 40px;
+        }
+        .slide ul li {
+            margin-bottom: 15px;
+        }
+        .slide-content {
+            max-width: 90%;
+            margin: 0 auto;
+        }
+        .slide img {
+            max-width: 100%;
+            max-height: 500px;
+            display: block;
+            margin: 20px auto;
+        }
+        .slide-blue {
+            background: linear-gradient(45deg, #2193b0, #6dd5ed);
+            color: white;
+        }
+        .slide-dark {
+            background: linear-gradient(45deg, #1a2a6c, #b21f1f);
+            color: white;
+        }
+        .slide-green {
+            background: linear-gradient(45deg, #134e5e, #71b280);
+            color: white;
+        }
+        .slide-orange {
+            background: linear-gradient(45deg, #e65c00, #f9d423);
+            color: white;
+        }
+        .slide-purple {
+            background: linear-gradient(45deg, #6a3093, #a044ff);
+            color: white;
+        }
+        .white-box {
+            background: rgba(255, 255, 255, 0.9);
+            color: #333;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Slide 1: Title Slide -->
+<div class="slide" id="slide-1">
+    <div class="slide-content">
+        <h1>TrustLLM Training Project: Dual-Track Approach to Compliant Language Models</h1>
+        <h3>Dual Research Focus: Compliance-Performance Balance & Advanced Training Optimization</h3>
+        <div style="margin-top: 40px; text-align: center;">
+            <img src="../core_train_slides/slide5-Two Complementary Research Tracks.svg" alt="Two Complementary Research Tracks" style="max-height: 400px;">
+        </div>
+    </div>
+    <style>
+        #slide-1 {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            color: white;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        #slide-1 h1 {
+            font-size: 3em;
+            margin-bottom: 30px;
+        }
+        #slide-1 h3 {
+            font-size: 1.8em;
+            font-weight: 400;
+            opacity: 0.9;
+        }
+    </style>
+</div>
+
+<!-- Slide 2: Project Overview -->
+<div class="slide" id="slide-2">
+    <div class="slide-content">
+        <h2>Project Overview</h2>
+        <ul>
+            <li><strong>Objective:</strong> Develop large language models that comply with European regulations while understanding compliance-performance tradeoffs</li>
+            <li><strong>Novel Training Methods:</strong> Creating innovative MoE architectures aimed at outperforming state-of-the-art models like DeepSeek while informing broader EU initiatives such as OpenEuroLLM</li>
+            <li><strong>Compliance Emphasis:</strong> Exploring methods to balance regulatory requirements with model capabilities</li>
+            <li><strong>Long-term Vision:</strong> Building foundation for future compliant AI systems in Europe & making EU LLMs competitive with global LLMs</li>
+        
+        </ul>
+    </div>
+    <style>
+        #slide-2 {
+            background: linear-gradient(135deg, #2b5876, #4e4376);
+            color: white;
+            display: flex;
+            align-items: center;
+        }
+        #slide-2 h2 {
+            margin-bottom: 40px;
+            font-size: 2.8em;
+        }
+        #slide-2 ul {
+            font-size: 1.4em;
+        }
+        #slide-2 ul li {
+            margin-bottom: 25px;
+        }
+        #slide-2 strong {
+            color: #ffcc00;
+        }
+    </style>
+</div>
+
+<!-- Slide 3: Compute Proposals Status -->
+<div class="slide" id="slide-3">
+    <div class="slide-content">
+        <h2>Compute Resources Status</h2>
+        <div class="compute-resources">
+            <div class="resource-box">
+                <h3>Leonardo BOOSTER (CONFIRMED)</h3>
+                <ul>
+                    <li>Large-scale training on Leonardo Booster system at CINECA (Bologna)</li>
+                    <li>Total Storage: 240 TB</li>
+                    <li>Training: ~3M A100 node hours => ~12M core-hours</li>
+                    <li>Allocation confirmed for 100B parameter model training</li>
+                </ul>
+            </div>
+            <div class="resource-box">
+                <h3>Jupiter EuroHPC (AWAITING CONFIRMATION)</h3>
+                <ul>
+                    <li>Applied for compute allocation: ~5M H100-hours</li>
+                    <li>Allocation sufficient for:</li>
+                    <li>- 15T training tokens for 34B parameter model</li>
+                    <li>- 15T training tokens for 8B parameter model</li>
+                    <li>Timeframe: Response expected in April</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <style>
+        #slide-3 {
+            background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
+            color: white;
+        }
+        #slide-3 h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        #slide-3 .compute-resources {
+            display: flex;
+            justify-content: space-between;
+            gap: 40px;
+        }
+        #slide-3 .resource-box {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        #slide-3 h3 {
+            color: #66ccff;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #slide-3 ul {
+            font-size: 1.3em;
+        }
+    </style>
+</div>
+
+<!-- Slide 4: Project Timeline -->
+<div class="slide" id="slide-4">
+    <div class="slide-content">
+        <h2>Project Roadmap</h2>
+        <img src="../core_train_slides/implementation_timeline.svg" alt="Project Timeline">
+        <ul>
+            <li><strong>Current Phase</strong> (March-April 2025): Pre-Training preparation with current meeting April 14th, 2025</li>
+            <li><strong>Pre-Training Setup</strong> (April-June 2025): Final infrastructure preparation and verification</li>
+            <li><strong>Training Commencement</strong> (June 20-30, 2025): Launch of both Leonardo and Jupiter training runs</li>
+            <li><strong>Training Duration</strong> (June-October 2025): 2-4 month training period for both models</li>
+            <li><strong>Interim Evaluation</strong> (August 2025): Analysis of preliminary results</li>
+            <li><strong>Final Model Delivery</strong> (November 2025): Completed models with compliance-performance documentation</li>
+        </ul>
+    </div>
+    <style>
+        #slide-4 {
+            background: linear-gradient(135deg, #3a6186, #89253e);
+            color: white;
+        }
+        #slide-4 h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #slide-4 img {
+            margin: 0 auto 20px;
+            max-height: 300px;
+        }
+        #slide-4 ul {
+            font-size: 1.1em;
+            columns: 2;
+        }
+        #slide-4 ul li {
+            margin-bottom: 10px;
+            break-inside: avoid-column;
+        }
+        #slide-4 strong {
+            color: #ffcc66;
+        }
+    </style>
+</div>
+
+<!-- Slide 5: Dual Research Approach -->
+<div class="slide" id="slide-5">
+    <div class="slide-content">
+        <h2>Two Complementary Research Tracks</h2>
+        <img src="../core_train_slides/slide5-Two Complementary Research Tracks.svg" alt="Two Complementary Research Tracks">
+    </div>
+    <style>
+        #slide-5 {
+            background: linear-gradient(135deg, #1a2980, #26d0ce);
+            color: white;
+            text-align: center;
+        }
+        #slide-5 h2 {
+            margin-bottom: 30px;
+        }
+        #slide-5 img {
+            max-height: 550px;
+        }
+    </style>
+</div>
+
+<!-- Slide 6: Leonardo HPC Research -->
+<div class="slide" id="slide-6">
+    <div class="slide-content">
+        <h2>Compliance vs. Performance Study (Leonardo)</h2>
+        <img src="../core_train_slides/slide6-Compliance vs. Performance Study Visual.svg" alt="Compliance vs. Performance Study Visual">
+    </div>
+    <style>
+        #slide-6 {
+            background: linear-gradient(135deg, #0B486B, #F56217);
+            color: white;
+            text-align: center;
+        }
+        #slide-6 h2 {
+            margin-bottom: 30px;
+        }
+        #slide-6 img {
+            max-height: 550px;
+        }
+    </style>
+</div>
+
+<!-- Slide 7: Compliance-Performance Matrix -->
+<div class="slide" id="slide-7">
+    <div class="slide-content">
+        <h2>Expected Compliance-Performance Relationship</h2>
+        <img src="../core_train_slides/theshold_complianc_performance.svg" alt="Compliance-Performance Matrix">
+    </div>
+    <style>
+        #slide-7 {
+            background: linear-gradient(135deg, #4A569D, #DC2424);
+            color: white;
+            text-align: center;
+        }
+        #slide-7 h2 {
+            margin-bottom: 30px;
+        }
+        #slide-7 img {
+            max-height: 550px;
+        }
+    </style>
+</div>
+
+<!-- Slide 8: Jupiter HPC Research - MoE Optimization -->
+<div class="slide" id="slide-8">
+    <div class="slide-content">
+        <h2>Advanced MoE Optimization Research (Jupiter)</h2>
+        <img src="../core_train_slides/moe-architecture-svg.svg" alt="MoE Architecture">
+        <div class="white-box">
+            <h3>Architecture Overview</h3>
+            <ul>
+                <li>30B parameter router with distributed experts</li>
+                <li>Designed for efficient training on Jupiter's parallel computing architecture</li>
+                <li>Leveraging sparse architecture principles from DeepSeekMoE</li>
+            </ul>
+        </div>
+    </div>
+    <style>
+        #slide-8 {
+            background: linear-gradient(135deg, #000046, #1CB5E0);
+            color: white;
+        }
+        #slide-8 h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #slide-8 img {
+            max-height: 380px;
+        }
+        #slide-8 .white-box ul {
+            font-size: 1.1em;
+        }
+    </style>
+</div>
+
+<!-- Slide 9: Jupiter HPC Research - Performance Scaling -->
+<div class="slide" id="slide-9">
+    <div class="slide-content">
+        <h2>Performance Scaling Expectations</h2>
+        <img src="../core_train_slides/jupiter_moe_adjusted_comparison.svg" alt="Performance Scaling">
+        <div class="white-box">
+            <h3>Parameter Activation Ratio Analysis</h3>
+            <ul>
+                <li>DeepSeek: 671B × 5.5% = 36.9B effective parameters</li>
+                <li>Our model: 100B × 30% = 30B effective parameters</li>
+                <li>Similar performance with fewer effective parameters</li>
+            </ul>
+        </div>
+    </div>
+    <style>
+        #slide-9 {
+            background: linear-gradient(135deg, #0B8793, #360033);
+            color: white;
+        }
+        #slide-9 h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #slide-9 img {
+            max-height: 380px;
+        }
+        #slide-9 .white-box ul {
+            font-size: 1.1em;
+        }
+    </style>
+</div>
+
+<!-- Slide 10: Target Performance Comparison -->
+<div class="slide" id="slide-10">
+    <div class="slide-content">
+        <h2>Target: Matching DeepSeek V3 Performance</h2>
+        <img src="../core_train_slides/moe-comparison-metrics.svg" alt="Performance Comparison with DeepSeek V3">
+        <div class="white-box">
+            <h3>Long-term Performance Goals</h3>
+            <ul>
+                <li>While our initial 100B model offers efficiency advantages, our ultimate goal is to match or exceed DeepSeek V3's performance</li>
+                <li>Future iterations will aim to close any performance gaps while maintaining our compliance advantages</li>
+                <li>This comparison represents our aspirational targets when scaling our approach to full capacity</li>
+            </ul>
+        </div>
+    </div>
+    <style>
+        #slide-10 {
+            background: linear-gradient(135deg, #4568DC, #B06AB3);
+            color: white;
+        }
+        #slide-10 h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #slide-10 img {
+            max-height: 380px;
+        }
+        #slide-10 .white-box ul {
+            font-size: 1.1em;
+        }
+    </style>
+</div>
+
+<!-- Slide 11: Data Compliance Strategy -->
+<div class="slide" id="slide-11">
+    <div class="slide-content">
+        <h2>Data Compliance Approach</h2>
+        <img src="../core_train_slides/pii_filtering_pipeline.svg" alt="PII Filtering Pipeline">
+        <div class="white-box">
+            <h3>Implementation Considerations</h3>
+            <ul>
+                <li>Balance between thorough filtering and preserving data utility</li>
+                <li>Varying approaches for different languages and domains</li>
+                <li>Integration with training pipeline for consistent application</li>
+            </ul>
+        </div>
+    </div>
+    <style>
+        #slide-11 {
+            background: linear-gradient(135deg, #1D4350, #A43931);
+            color: white;
+        }
+        #slide-11 h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        #slide-11 img {
+            max-height: 380px;
+        }
+        #slide-11 .white-box {
+            margin-top: 20px;
+        }
+        #slide-11 .white-box ul {
+            font-size: 1.1em;
+        }
+    </style>
+</div>
+
+<!-- Slide 12: Data Filtering Protocol -->
+<div class="slide" id="slide-12">
+    <div class="slide-content">
+        <h2>Three-Layer Filtering Process</h2>
+        <img src="../core_train_slides/data_filtering_funnel.svg" alt="Data Filtering Funnel">
+    </div>
+    <style>
+        #slide-12 {
+            background: linear-gradient(135deg, #3C3B3F, #605C3C);
+            color: white;
+            text-align: center;
+        }
+        #slide-12 h2 {
+            margin-bottom: 30px;
+        }
+        #slide-12 img {
+            max-height: 550px;
+        }
+    </style>
+</div>
+
+<!-- Slide 13: PII Detection Specifics -->
+<div class="slide" id="slide-13">
+    <div class="slide-content">
+        <h2>PII Detection Implementation</h2>
+        <div class="content-columns">
+            <div class="column">
+                <h3>Structured Identifiers Targeted</h3>
+                <ul>
+                    <li>National ID numbers (format varies by country)</li>
+                    <li>Passport numbers</li>
+                    <li>Driver's license numbers</li>
+                    <li>Credit card numbers and CVV codes</li>
+                    <li>IBANs and bank account numbers</li>
+                    <li>IP addresses</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Technical Approach</h3>
+                <ul>
+                    <li>High-precision regex patterns for each identifier type</li>
+                    <li>Language-specific pattern libraries</li>
+                    <li>Conservative matching criteria to minimize false positives</li>
+                </ul>
+                <div class="code-example">
+                    <pre>Swedish ID: ^\d{6}[-\s]\d{4}$
+IBAN: [A-Z]{2}\d{2}[\s](?:\d{4}[\s]){4}\d{2}</pre>
+                </div>
+            </div>
+        </div>
+    </div>
+    <style>
+        #slide-13 {
+            background: linear-gradient(135deg, #0F2027, #203A43, #2C5364);
+            color: white;
+        }
+        #slide-13 h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        #slide-13 .content-columns {
+            display: flex;
+            gap: 40px;
+        }
+        #slide-13 .column {
+            flex: 1;
+        }
+        #slide-13 h3 {
+            color: #66ccff;
+            margin-bottom: 20px;
+        }
+        #slide-13 .code-example {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+        #slide-13 pre {
+            color: #99ccff;
+            font-size: 1.1em;
+            white-space: pre-wrap;
+        }
+    </style>
+</div>
+
+<!-- Slide 16: Research Impact and Significance -->
+<div class="slide" id="slide-16">
+    <div class="slide-content">
+        <h2>Research Impact and Significance</h2>
+        <div class="content-columns">
+            <div class="column">
+                <h3>Compliance-Performance Research</h3>
+                <ul>
+                    <li>First systematic study of regulatory compliance impact on model capabilities</li>
+                    <li>Quantitative framework for balancing data privacy with model utility</li>
+                    <li>Cross-lingual analysis of filtering effects on model performance</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>MoE Architecture Research</h3>
+                <ul>
+                    <li>Novel approaches to efficient parameter utilization in sparse models</li>
+                    <li>Potential to reduce training costs while maintaining performance</li>
+                    <li>Contributions to scaling laws for mixture-of-experts architectures</li>
+                </ul>
+            </div>
+        </div>
+        <div class="broader-impact">
+            <h3>Broader Implications</h3>
+            <ul>
+                <li>Framework for developing compliant AI systems in regulated environments</li>
+                <li>Support for EU's leadership in responsible AI development</li>
+                <li>Practical insights for implementing AI regulations while maintaining competitiveness</li>
+            </ul>
+        </div>
+    </div>
+    <style>
+        #slide-16 {
+            background: linear-gradient(135deg, #3a6186, #89253e);
+            color: white;
+        }
+        #slide-16 h2 {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        #slide-16 .content-columns {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        #slide-16 .column {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        #slide-16 h3 {
+            color: #ffcc99;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #slide-16 .broader-impact {
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        #slide-16 .broader-impact h3 {
+            color: #66ccff;
+        }
+        #slide-16 ul {
+            font-size: 1.1em;
+        }
+    </style>
+</div>
+
+<!-- Slide 17: Next Steps -->
+<div class="slide" id="slide-17">
+    <div class="slide-content">
+        <h2>Moving Forward Together</h2>
+        <div class="content-columns">
+            <div class="column">
+                <h3>Immediate Action Items</h3>
+                <ul>
+                    <li>Finalize all technical preparations by end of April/early May</li>
+                    <li>Complete final infrastructure testing (May/early June 2025)</li>
+                    <li>Prepare for June 20-30th, 2025 training start</li>
+                </ul>
+            </div>
+            <div class="column">
+                <h3>Partner Collaboration</h3>
+                <ul>
+                    <li>WP2: Final data protocol validation</li>
+                    <li>Technical teams: Final infrastructure validation tests</li>
+                    <li>Evaluation team: Benchmark preparation</li>
+                </ul>
+            </div>
+        </div>
+        <div class="feedback-box">
+            <h3>Feedback Request</h3>
+            <ul>
+                <li>Input on additional compliance considerations</li>
+                <li>Suggestions for evaluation metrics</li>
+                <li>Approval of training timeline and resource allocation</li>
+            </ul>
+        </div>
+    </div>
+    <style>
+        #slide-17 {
+            background: linear-gradient(135deg, #000428, #004e92);
+            color: white;
+        }
+        #slide-17 h2 {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        #slide-17 .content-columns {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 30px;
+        }
+        #slide-17 .column {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        #slide-17 h3 {
+            color: #66ccff;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        #slide-17 .feedback-box {
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            padding: 20px;
+        }
+        #slide-17 .feedback-box h3 {
+            text-align: center;
+            color: #ffcc99;
+        }
+        #slide-17 ul {
+            font-size: 1.1em;
+        }
+    </style>
+</div>
+
+</body>
+</html> 

@@ -1,0 +1,28 @@
+# Temp files
+temp/
+
+
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+*.sublime-*
+
+# Temporary files
+*.tmp
+*.temp
+*~
+
+# Logs
+*.log
+
+
+
+# Exclude example files
+!src/assets/styles/base.css
+!src/example.html
+!dist/example.pdf

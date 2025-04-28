@@ -1,0 +1,134 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">Distillation-Augmented GRPO (DA-GRPO) Algorithm</text>
+  
+  <!-- Student Model -->
+  <rect x="350" y="70" width="100" height="60" fill="#b8e6b8" stroke="#1F571F" stroke-width="2" rx="8" ry="8"/>
+  <text x="400" y="105" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Student</text>
+  
+  <!-- Generate Student Outputs -->
+  <rect x="230" y="150" width="140" height="40" fill="#b8e6b8" stroke="#1F571F" stroke-width="2" rx="5" ry="5"/>
+  <text x="300" y="175" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Generate G-1 Outputs</text>
+  
+  <!-- Student to Generate arrow -->
+  <line x1="400" y1="130" x2="400" y2="145" stroke="#1F571F" stroke-width="1.5"/>
+  <line x1="400" y1="145" x2="300" y2="145" stroke="#1F571F" stroke-width="1.5"/>
+  <line x1="300" y1="145" x2="300" y2="150" stroke="#1F571F" stroke-width="1.5"/>
+  <polygon points="300,150 295,140 305,140" fill="#1F571F"/>
+  
+  <!-- Teacher Model -->
+  <rect x="470" y="100" width="140" height="40" fill="#fceaff" stroke="#8e44ad" stroke-width="2" rx="5" ry="5"/>
+  <text x="540" y="125" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">Teacher Model</text>
+  
+  <!-- Teacher Output -->
+  <rect x="470" y="150" width="140" height="40" fill="#fceaff" stroke="#8e44ad" stroke-width="2" rx="5" ry="5"/>
+  <text x="540" y="175" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Generate 1 Output</text>
+  
+  <!-- Teacher to Generate arrow -->
+  <line x1="540" y1="140" x2="540" y2="150" stroke="#8e44ad" stroke-width="1.5"/>
+  <polygon points="540,150 535,140 545,140" fill="#8e44ad"/>
+  
+  <!-- Group Outputs -->
+  <rect x="350" y="220" width="100" height="40" fill="#e5f6e5" stroke="#379237" stroke-width="2" rx="5" ry="5"/>
+  <text x="400" y="245" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Group Outputs</text>
+  
+  <!-- Student to Group arrow -->
+  <line x1="300" y1="190" x2="300" y2="205" stroke="#666" stroke-width="1.5"/>
+  <line x1="300" y1="205" x2="400" y2="205" stroke="#666" stroke-width="1.5"/>
+  <line x1="400" y1="205" x2="400" y2="220" stroke="#666" stroke-width="1.5"/>
+  <polygon points="400,220 395,210 405,210" fill="#666"/>
+  
+  <!-- Teacher to Group arrow -->
+  <line x1="540" y1="190" x2="540" y2="205" stroke="#666" stroke-width="1.5"/>
+  <line x1="540" y1="205" x2="400" y2="205" stroke="#666" stroke-width="1.5"/>
+  <line x1="400" y1="205" x2="400" y2="220" stroke="#666" stroke-width="1.5"/>
+  <polygon points="400,220 395,210 405,210" fill="#666"/>
+  
+  <!-- Compute Rewards -->
+  <rect x="350" y="270" width="100" height="40" fill="#e5f6e5" stroke="#379237" stroke-width="2" rx="5" ry="5"/>
+  <text x="400" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Compute Rewards</text>
+  
+  <!-- Group to Rewards arrow -->
+  <line x1="400" y1="260" x2="400" y2="270" stroke="#379237" stroke-width="1.5"/>
+  <polygon points="400,270 395,260 405,260" fill="#379237"/>
+  
+  <!-- Group Statistics -->
+  <rect x="200" y="320" width="140" height="40" fill="#e5f6e5" stroke="#379237" stroke-width="2" rx="5" ry="5"/>
+  <text x="270" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Group Statistics</text>
+  
+  <!-- Rewards to Statistics arrow -->
+  <line x1="400" y1="310" x2="400" y2="320" stroke="#666" stroke-width="1.5"/>
+  <line x1="400" y1="320" x2="340" y2="320" stroke="#666" stroke-width="1.5"/>
+  <polygon points="340,320 350,315 350,325" fill="#666"/>
+  
+  <!-- Calculate Advantages -->
+  <rect x="200" y="370" width="140" height="40" fill="#e5f6e5" stroke="#379237" stroke-width="2" rx="5" ry="5"/>
+  <text x="270" y="395" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Group Advantages</text>
+  
+  <!-- Statistics to Advantages arrow -->
+  <line x1="270" y1="360" x2="270" y2="370" stroke="#379237" stroke-width="1.5"/>
+  <polygon points="270,370 265,360 275,360" fill="#379237"/>
+  
+  <!-- Reference Model -->
+  <rect x="600" y="220" width="140" height="40" fill="#e6f2ff" stroke="#3771c8" stroke-width="2" rx="5" ry="5"/>
+  <text x="670" y="245" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Reference Model</text>
+  
+  <!-- KL Reference Term -->
+  <rect x="600" y="320" width="140" height="40" fill="#e6f2ff" stroke="#3771c8" stroke-width="2" rx="5" ry="5"/>
+  <text x="670" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Reference KL Term</text>
+  
+  <!-- Reference to KL Term arrow -->
+  <line x1="670" y1="260" x2="670" y2="320" stroke="#3771c8" stroke-width="1.5"/>
+  <polygon points="670,320 665,310 675,310" fill="#3771c8"/>
+  
+  <!-- Teacher Distribution -->
+  <rect x="470" y="270" width="140" height="40" fill="#fceaff" stroke="#8e44ad" stroke-width="2" rx="5" ry="5"/>
+  <text x="540" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Teacher Distribution</text>
+  
+  <!-- Teacher to Distribution arrow -->
+  <line x1="540" y1="190" x2="540" y2="270" stroke="#8e44ad" stroke-width="1.5"/>
+  <polygon points="540,270 535,260 545,260" fill="#8e44ad"/>
+  
+  <!-- KL Teacher Term -->
+  <rect x="470" y="320" width="140" height="40" fill="#fceaff" stroke="#8e44ad" stroke-width="2" rx="5" ry="5"/>
+  <text x="540" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Teacher KL Term</text>
+  
+  <!-- Distribution to KL Term arrow -->
+  <line x1="540" y1="310" x2="540" y2="320" stroke="#8e44ad" stroke-width="1.5"/>
+  <polygon points="540,320 535,310 545,310" fill="#8e44ad"/>
+  
+  <!-- GRPO Loss -->
+  <rect x="200" y="420" width="140" height="40" fill="#e5f6e5" stroke="#379237" stroke-width="2" rx="5" ry="5"/>
+  <text x="270" y="445" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">GRPO Loss</text>
+  
+  <!-- Advantages to GRPO Loss arrow -->
+  <line x1="270" y1="410" x2="270" y2="420" stroke="#379237" stroke-width="1.5"/>
+  <polygon points="270,420 265,410 275,410" fill="#379237"/>
+  
+  <!-- Total Loss -->
+  <rect x="350" y="420" width="100" height="60" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" rx="8" ry="8"/>
+  <text x="400" y="445" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Total Loss</text>
+  <text x="400" y="465" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Optimize</text>
+  
+  <!-- GRPO Loss to Total arrow -->
+  <line x1="340" y1="440" x2="350" y2="440" stroke="#666" stroke-width="1.5"/>
+  <polygon points="350,440 340,435 340,445" fill="#666"/>
+  
+  <!-- Teacher KL to Total arrow -->
+  <line x1="540" y1="360" x2="540" y2="440" stroke="#666" stroke-width="1.5"/>
+  <line x1="540" y1="440" x2="450" y2="440" stroke="#666" stroke-width="1.5"/>
+  <polygon points="450,440 460,435 460,445" fill="#666"/>
+  
+  <!-- Reference KL to Total arrow -->
+  <line x1="670" y1="360" x2="670" y2="440" stroke="#666" stroke-width="1.5"/>
+  <line x1="670" y1="440" x2="450" y2="440" stroke="#666" stroke-width="1.5"/>
+  <polygon points="450,440 460,435 460,445" fill="#666"/>
+  
+  <!-- Update Student -->
+  <line x1="400" y1="420" x2="400" y2="70" stroke="#388e3c" stroke-width="2" stroke-dasharray="10,5"/>
+  <polygon points="400,70 395,80 405,80" fill="#388e3c"/>
+  <text x="405" y="250" font-family="Arial" font-size="14" font-weight="bold" text-anchor="start" fill="#388e3c">Update θ</text>
+</svg>

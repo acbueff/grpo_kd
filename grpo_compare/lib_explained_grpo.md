@@ -1,4 +1,3 @@
-
 I'll analyze each implementation in the grpo_compare folder to identify and compare the GRPO implementations. Let me examine each subfolder.
 
 Ran tool

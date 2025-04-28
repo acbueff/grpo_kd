@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="5" ry="5"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">Project Roadmap</text>
+  
+  <!-- Timeline Base -->
+  <line x1="100" y1="250" x2="700" y2="250" stroke="#95a5a6" stroke-width="4"/>
+  
+  <!-- Timeline Phases -->
+  <!-- Current Phase -->
+  <rect x="100" y="200" width="100" height="100" rx="5" ry="5" fill="#3498db" opacity="0.3" stroke="#3498db"/>
+  <text x="150" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Current Phase</text>
+  <text x="150" y="195" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">Mar-Apr 2024</text>
+  
+  <!-- Data Preparation -->
+  <rect x="200" y="200" width="200" height="100" rx="5" ry="5" fill="#f39c12" opacity="0.3" stroke="#f39c12"/>
+  <text x="300" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Data Preparation</text>
+  <text x="300" y="195" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">May 2024-May 2025</text>
+  
+  <!-- Training Phase -->
+  <rect x="400" y="200" width="150" height="100" rx="5" ry="5" fill="#2ecc71" opacity="0.3" stroke="#2ecc71"/>
+  <text x="475" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Training Phase</text>
+  <text x="475" y="195" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">Jun 2025-Dec 2025</text>
+  
+  <!-- Evaluation and Delivery -->
+  <rect x="550" y="200" width="150" height="100" rx="5" ry="5" fill="#9b59b6" opacity="0.3" stroke="#9b59b6"/>
+  <text x="625" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#2c3e50">Evaluation &amp; Delivery</text>
+  <text x="625" y="195" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">Jan 2026-Jun 2026</text>
+  
+  <!-- Key Milestone Markers -->
+  <!-- Current Milestone - April Meeting -->
+  <circle cx="150" cy="250" r="8" fill="#3498db"/>
+  <line x1="150" y1="250" x2="150" y2="320" stroke="#3498db" stroke-width="2"/>
+  <rect x="90" y="320" width="120" height="50" rx="5" ry="5" fill="white" stroke="#3498db"/>
+  <text x="150" y="340" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#2c3e50">Planning Meeting</text>
+  <text x="150" y="360" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2c3e50">April 14, 2024</text>
+  
+  <!-- Dataset Creation -->
+  <circle cx="300" cy="250" r="8" fill="#f39c12"/>
+  <line x1="300" y1="250" x2="300" y2="380" stroke="#f39c12" stroke-width="2"/>
+  <rect x="240" y="380" width="120" height="50" rx="5" ry="5" fill="white" stroke="#f39c12"/>
+  <text x="300" y="400" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#2c3e50">Datasets Created</text>
+  <text x="300" y="420" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2c3e50">May 31, 2025</text>
+  
+  <!-- Training Start - HIGHLIGHTED -->
+  <circle cx="430" cy="250" r="12" fill="#e74c3c"/>
+  <line x1="430" y1="250" x2="430" y2="320" stroke="#e74c3c" stroke-width="3"/>
+  <rect x="370" y="320" width="120" height="60" rx="5" ry="5" fill="#e74c3c" opacity="0.8"/>
+  <text x="430" y="345" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="white">Training Launch</text>
+  <text x="430" y="365" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="white">June 15-30, 2025</text>
+  
+  <!-- Interim Evaluation -->
+  <circle cx="520" cy="250" r="8" fill="#2ecc71"/>
+  <line x1="520" y1="250" x2="520" y2="380" stroke="#2ecc71" stroke-width="2"/>
+  <rect x="460" y="380" width="120" height="50" rx="5" ry="5" fill="white" stroke="#2ecc71"/>
+  <text x="520" y="400" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#2c3e50">Interim Evaluation</text>
+  <text x="520" y="420" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2c3e50">December 15, 2025</text>
+  
+  <!-- Final Model Delivery -->
+  <circle cx="625" cy="250" r="10" fill="#9b59b6"/>
+  <line x1="625" y1="250" x2="625" y2="320" stroke="#9b59b6" stroke-width="2"/>
+  <rect x="565" y="320" width="120" height="50" rx="5" ry="5" fill="white" stroke="#9b59b6"/>
+  <text x="625" y="340" font-family="Arial, sans-serif" font-size="11" font-weight="bold" text-anchor="middle" fill="#2c3e50">Final Delivery</text>
+  <text x="625" y="360" font-family="Arial, sans-serif" font-size="11" text-anchor="middle" fill="#2c3e50">June 30, 2026</text>
+  
+  <!-- Timeline Labels (Months/Years) -->
+  <line x1="100" y1="250" x2="100" y2="260" stroke="#95a5a6" stroke-width="2"/>
+  <text x="100" y="275" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">Apr</text>
+  <text x="100" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">2024</text>
+  
+  <line x1="200" y1="250" x2="200" y2="260" stroke="#95a5a6" stroke-width="2"/>
+  <text x="200" y="275" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">Jul</text>
+  <text x="200" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">2024</text>
+  
+  <line x1="300" y1="250" x2="300" y2="260" stroke="#95a5a6" stroke-width="2"/>
+  <text x="300" y="275" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">Oct</text>
+  <text x="300" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">2024</text>
+  
+  <line x1="400" y1="250" x2="400" y2="260" stroke="#95a5a6" stroke-width="2"/>
+  <text x="400" y="275" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">Apr</text>
+  <text x="400" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">2025</text>
+  
+  <line x1="500" y1="250" x2="500" y2="260" stroke="#95a5a6" stroke-width="2"/>
+  <text x="500" y="275" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">Oct</text>
+  <text x="500" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">2025</text>
+  
+  <line x1="600" y1="250" x2="600" y2="260" stroke="#95a5a6" stroke-width="2"/>
+  <text x="600" y="275" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">Apr</text>
+  <text x="600" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">2026</text>
+  
+  <line x1="700" y1="250" x2="700" y2="260" stroke="#95a5a6" stroke-width="2"/>
+  <text x="700" y="275" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">Jul</text>
+  <text x="700" y="290" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#7f8c8d">2026</text>
+  
+  <!-- Key Activities -->
+  <text x="150" y="230" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2c3e50">Preparation &amp; Planning</text>
+  <text x="300" y="230" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2c3e50">Dataset Creation</text>
+  <text x="475" y="230" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2c3e50">Training Runs</text>
+  <text x="625" y="230" font-family="Arial, sans-serif" font-size="10" text-anchor="middle" fill="#2c3e50">Analysis &amp; Documentation</text>
+  
+  <!-- Training Highlight Box -->
+  <rect x="410" y="100" width="200" height="60" rx="5" ry="5" fill="#e74c3c" opacity="0.1" stroke="#e74c3c" stroke-width="1"/>
+  <text x="510" y="125" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#e74c3c">Training Start Milestone</text>
+  <text x="510" y="145" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#e74c3c">Leonardo &amp; Jupiter HPC Launch</text>
+  <line x1="510" y1="160" x2="430" y2="238" stroke="#e74c3c" stroke-width="1" stroke-dasharray="3,3"/>
+  
+  <!-- Computing Resources -->
+  <rect x="270" y="440" width="270" height="40" rx="5" ry="5" fill="#ecf0f1"/>
+  <text x="300" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">Leonardo HPC</text>
+  <line x1="330" y1="465" x2="350" y2="465" stroke="#2c3e50" stroke-width="1"/>
+  <text x="405" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">Jupiter EuroHPC</text>
+  <line x1="460" y1="465" x2="480" y2="465" stroke="#2c3e50" stroke-width="1"/>
+  <text x="510" y="465" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">CONFIRMED</text>
+</svg> 

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 500">
+  <!-- Background -->
+  <rect width="900" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="450" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold">Training Token Allocation Sankey Diagram</text>
+  
+  <!-- Columns for Sankey -->
+  <!-- Total Budget -->
+  <rect x="100" y="150" width="60" height="250" rx="5" ry="5" fill="#78909c" stroke="#333" stroke-width="1"/>
+  <text x="130" y="130" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold">Total Budget</text>
+  <text x="130" y="275" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white" font-weight="bold">2.5T</text>
+  <text x="130" y="295" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white" font-weight="bold">Tokens</text>
+  
+  <!-- Compliance Levels -->
+  <rect x="400" y="150" width="60" height="60" rx="5" ry="5" fill="#7ac142" stroke="#333" stroke-width="1"/>
+  <text x="430" y="130" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold">Data Tiers</text>
+  <text x="430" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">HC Data</text>
+  
+  <rect x="400" y="230" width="60" height="90" rx="5" ry="5" fill="#ffc845" stroke="#333" stroke-width="1"/>
+  <text x="430" y="275" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">MC Data</text>
+  
+  <rect x="400" y="340" width="60" height="60" rx="5" ry="5" fill="#ff6b45" stroke="#333" stroke-width="1"/>
+  <text x="430" y="370" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">LC Data</text>
+  
+  <!-- Model Checkpoints -->
+  <rect x="700" y="130" width="100" height="70" rx="5" ry="5" fill="#7ac142" stroke="#333" stroke-width="1"/>
+  <text x="750" y="110" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" font-weight="bold">Checkpoints</text>
+  <text x="750" y="160" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Model-HC</text>
+  <text x="750" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(High Safety)</text>
+  
+  <rect x="700" y="220" width="100" height="100" rx="5" ry="5" fill="#ffc845" stroke="#333" stroke-width="1"/>
+  <text x="750" y="265" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Model-MC</text>
+  <text x="750" y="285" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(Balanced)</text>
+  
+  <rect x="700" y="340" width="100" height="85" rx="5" ry="5" fill="#ff6b45" stroke="#333" stroke-width="1"/>
+  <text x="750" y="375" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Model-LC</text>
+  <text x="750" y="395" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(Max Performance)</text>
+  
+  <!-- Flow paths from Budget to Data Tiers -->
+  <!-- HC Flow -->
+  <path d="M160,180 C280,180 280,180 400,180" fill="#7ac142" stroke="#7ac142" stroke-width="1" opacity="0.7"/>
+  
+  <!-- MC Flow -->
+  <path d="M160,230 C280,230 280,275 400,275" fill="#ffc845" stroke="#ffc845" stroke-width="1" opacity="0.7"/>
+  
+  <!-- LC Flow -->
+  <path d="M160,320 C280,320 280,370 400,370" fill="#ff6b45" stroke="#ff6b45" stroke-width="1" opacity="0.7"/>
+  
+  <!-- Flow paths from Data Tiers to Checkpoints -->
+  <!-- HC to Model-HC -->
+  <path d="M460,180 C580,180 580,160 700,160" fill="#7ac142" stroke="#7ac142" stroke-width="1" opacity="0.7"/>
+  
+  <!-- HC to Model-MC -->
+  <path d="M460,180 C540,180 540,240 700,240" fill="#7ac142" stroke="#7ac142" stroke-width="1" opacity="0.7"/>
+  
+  <!-- HC to Model-LC -->
+  <path d="M460,180 C520,180 520,350 700,350" fill="#7ac142" stroke="#7ac142" stroke-width="1" opacity="0.7"/>
+  
+  <!-- MC to Model-MC -->
+  <path d="M460,275 C580,275 580,270 700,270" fill="#ffc845" stroke="#ffc845" stroke-width="1" opacity="0.7"/>
+  
+  <!-- MC to Model-LC -->
+  <path d="M460,275 C540,275 540,370 700,370" fill="#ffc845" stroke="#ffc845" stroke-width="1" opacity="0.7"/>
+  
+  <!-- LC to Model-LC -->
+  <path d="M460,370 C580,370 580,390 700,390" fill="#ff6b45" stroke="#ff6b45" stroke-width="1" opacity="0.7"/>
+  
+  <!-- Token annotations -->
+  <text x="280" y="170" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">0.83T tokens</text>
+  <text x="280" y="230" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">0.84T tokens</text>
+  <text x="280" y="320" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">0.83T tokens</text>
+  
+  <!-- Information box -->
+  <rect x="100" y="440" width="700" height="50" rx="5" ry="5" fill="#e3f2fd" stroke="#1565c0" stroke-width="1"/>
+  <text x="120" y="460" font-family="Arial, sans-serif" font-size="12" fill="#1565c0" font-weight="bold">Key Insight:</text>
+  <text x="450" y="460" font-family="Arial, sans-serif" font-size="12" fill="#1565c0" text-anchor="middle">
+    In sequential training, later checkpoints see more total data (cumulative from previous stages).
+  </text>
+  <text x="450" y="475" font-family="Arial, sans-serif" font-size="12" fill="#1565c0" text-anchor="middle">
+    Model-LC has 3x more tokens than Model-HC, making direct performance comparisons scientifically challenging.
+  </text>
+</svg>

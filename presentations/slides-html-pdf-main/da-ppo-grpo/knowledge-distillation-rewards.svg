@@ -1,0 +1,54 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">Knowledge Distillation Reward Functions</text>
+  
+  <!-- Teacher Model Box -->
+  <rect x="300" y="70" width="200" height="70" fill="#fceaff" stroke="#8e44ad" stroke-width="2" rx="10" ry="10"/>
+  <text x="400" y="110" font-family="Arial" font-size="20" font-weight="bold" text-anchor="middle" fill="#333">Teacher Model</text>
+  
+  <!-- Two Branches -->
+  <line x1="400" y1="140" x2="400" y2="170" stroke="#666" stroke-width="2"/>
+  <line x1="400" y1="170" x2="220" y2="170" stroke="#666" stroke-width="2"/>
+  <line x1="400" y1="170" x2="580" y2="170" stroke="#666" stroke-width="2"/>
+  <line x1="220" y1="170" x2="220" y2="200" stroke="#666" stroke-width="2"/>
+  <line x1="580" y1="170" x2="580" y2="200" stroke="#666" stroke-width="2"/>
+  
+  <!-- TDA Box -->
+  <rect x="100" y="200" width="240" height="260" fill="#fff8e1" stroke="#ffa000" stroke-width="2" rx="10" ry="10"/>
+  <text x="220" y="230" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Teacher Distribution Alignment</text>
+  <text x="220" y="255" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">(TDA) Reward</text>
+  
+  <!-- TDA Equation -->
+  <text x="220" y="290" font-family="Arial" font-size="14" text-anchor="middle" font-style="italic" fill="#333">R_TDA(s,y) = -D_KL(π_T(·|s) || π_θ(·|s))</text>
+  
+  <!-- TDA Details -->
+  <rect x="120" y="310" width="200" height="130" fill="#fff" stroke="#ffa000" stroke-width="1" rx="5" ry="5"/>
+  <text x="220" y="330" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Encourages student to match</text>
+  <text x="220" y="350" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">  teacher's token distribution</text>
+  <text x="220" y="370" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Token-level distillation</text>
+  <text x="220" y="390" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Transfers nuanced knowledge</text>
+  <text x="220" y="410" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Higher computational cost</text>
+  
+  <!-- TAA Box -->
+  <rect x="460" y="200" width="240" height="260" fill="#e3f2fd" stroke="#1976d2" stroke-width="2" rx="10" ry="10"/>
+  <text x="580" y="230" font-family="Arial" font-size="18" font-weight="bold" text-anchor="middle" fill="#333">Teacher Answer Agreement</text>
+  <text x="580" y="255" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">(TAA) Reward</text>
+  
+  <!-- TAA Equation -->
+  <text x="580" y="290" font-family="Arial" font-size="14" text-anchor="middle" font-style="italic" fill="#333">R_TAA(s,y) = f(y, y^(T))</text>
+  
+  <!-- TAA Details -->
+  <rect x="480" y="310" width="200" height="130" fill="#fff" stroke="#1976d2" stroke-width="1" rx="5" ry="5"/>
+  <text x="580" y="330" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Rewards matching teacher's</text>
+  <text x="580" y="350" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">  final answer/solution</text>
+  <text x="580" y="370" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Sequence-level distillation</text>
+  <text x="580" y="390" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• Good for tasks with clear answers</text>
+  <text x="580" y="410" font-family="Arial" font-size="12" text-anchor="middle" fill="#333">• More computationally efficient</text>
+  
+  <!-- Combined Rewards Box at Bottom -->
+  <rect x="200" y="470" width="400" height="20" fill="#e8f5e9" stroke="#388e3c" stroke-width="1" rx="5" ry="5"/>
+  <text x="400" y="485" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">R_combined = R_task + λ₁·R_TDA + λ₂·R_TAA</text>
+</svg>

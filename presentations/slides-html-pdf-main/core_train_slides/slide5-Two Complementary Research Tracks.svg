@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="5" ry="5"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" font-weight="bold" text-anchor="middle" fill="#2c3e50">Two Complementary Research Tracks</text>
+
+  <!-- Left Circle - Leonardo HPC Research -->
+  <circle cx="250" cy="250" r="180" fill="#3498db" opacity="0.6"/>
+  <text x="250" y="140" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">Track 1: Leonardo HPC</text>
+  <text x="250" y="170" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c3e50">Compliance vs. Performance</text>
+  
+  <!-- Left Circle Content - LEFT ALIGNED -->
+  <text x="150" y="210" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#2c3e50">Dense 100B parameter model</text>
+  <text x="150" y="240" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#2c3e50">Multiple training runs</text>
+  <text x="150" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#2c3e50">Varying data compliance levels</text>
+  <text x="150" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#2c3e50">Focus on regulatory alignment</text>
+  <text x="150" y="330" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#2c3e50">Performance impact assessment</text>
+  
+  <!-- Right Circle - Jupiter HPC Research -->
+  <circle cx="550" cy="250" r="180" fill="#e74c3c" opacity="0.6"/>
+  <text x="550" y="140" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="#2c3e50">Track 2: Jupiter HPC</text>
+  <text x="550" y="170" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c3e50">Training Optimization</text>
+  
+  <!-- Right Circle Content - RIGHT ALIGNED -->
+  <text x="650" y="210" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="#2c3e50">MoE architecture</text>
+  <text x="650" y="240" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="#2c3e50">30B parameter router</text>
+  <text x="650" y="270" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="#2c3e50">BitNet implementation</text>
+  <text x="650" y="300" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="#2c3e50">DeepSeek baseline comparison</text>
+  <text x="650" y="330" font-family="Arial, sans-serif" font-size="14" text-anchor="end" fill="#2c3e50">Training efficiency focus</text>
+  
+  <!-- Add semi-transparent dark overlay for center area to make white text readable -->
+  <circle cx="400" cy="260" r="60" fill="#2c3e50" opacity="0.6"/>
+  
+  <!-- Intersection Content - White text and smaller size -->
+  <text x="400" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">Shared Insights</text>
+  <text x="400" y="255" font-family="Arial, sans-serif" font-size="11.5" text-anchor="middle" fill="white">Model capabilities</text>
+  <text x="400" y="275" font-family="Arial, sans-serif" font-size="11.5" text-anchor="middle" fill="white">Training methodologies</text>
+  <text x="400" y="295" font-family="Arial, sans-serif" font-size="11.5" text-anchor="middle" fill="white">EU AI compliance</text>
+  
+  <!-- Legend -->
+  <rect x="150" y="400" width="500" height="70" rx="10" ry="10" fill="white" stroke="#95a5a6"/>
+  <text x="400" y="420" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#2c3e50">Complementary Nature:</text>
+  <text x="400" y="440" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">• Findings from both tracks inform each other</text>
+  <text x="400" y="455" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#2c3e50">• Enables comprehensive understanding of both compliance and efficiency dimensions</text>
+  
+  <!-- Small Icons -->
+  <circle cx="130" cy="140" r="25" fill="#3498db" opacity="0.8"/>
+  <text x="130" y="145" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">100B</text>
+  
+  <circle cx="670" cy="140" r="25" fill="#e74c3c" opacity="0.8"/>
+  <text x="670" y="145" font-family="Arial, sans-serif" font-size="12" font-weight="bold" text-anchor="middle" fill="white">MoE</text>
+</svg>

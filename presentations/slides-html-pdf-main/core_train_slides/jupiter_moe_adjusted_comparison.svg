@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600">
+  <!-- Background and definitions -->
+  <defs>
+    <linearGradient id="bg-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#f8f9fa;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#e9ecef;stop-opacity:1" />
+    </linearGradient>
+    
+    <!-- DeepSeek gradient -->
+    <linearGradient id="deepseek-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#4b6cb7;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#182848;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <!-- Our approach gradient -->
+    <linearGradient id="our-gradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#11998e;stop-opacity:0.9" />
+      <stop offset="100%" style="stop-color:#38ef7d;stop-opacity:0.9" />
+    </linearGradient>
+    
+    <!-- Pattern for our approach -->
+    <pattern id="our-pattern" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="url(#our-gradient)" />
+    </pattern>
+    
+    <!-- Pattern for DeepSeek -->
+    <pattern id="deepseek-pattern" width="10" height="10" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <rect width="8" height="8" fill="url(#deepseek-gradient)" />
+    </pattern>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1000" height="600" fill="url(#bg-gradient)" />
+  
+  <!-- Title -->
+  <text x="500" y="50" font-family="Arial, sans-serif" font-size="28" font-weight="bold" text-anchor="middle" fill="#333">MoE Efficiency: Scaled Approach vs. DeepSeek V3</text>
+  <text x="500" y="80" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="#666">Comparing our 100B parameter model to DeepSeek's 671B model</text>
+  
+  <!-- Main content container -->
+  <rect x="50" y="100" width="900" height="450" fill="white" rx="10" ry="10" stroke="#ddd" stroke-width="2" />
+  
+  <!-- Legend -->
+  <rect x="150" y="120" width="20" height="20" fill="url(#deepseek-gradient)" rx="3" ry="3" />
+  <text x="180" y="135" font-family="Arial, sans-serif" font-size="16" fill="#333">DeepSeek V3 (671B parameters)</text>
+  
+  <rect x="450" y="120" width="20" height="20" fill="url(#our-gradient)" rx="3" ry="3" />
+  <text x="480" y="135" font-family="Arial, sans-serif" font-size="16" fill="#333">Our Approach (100B parameters)</text>
+  
+  <!-- Parameter Size Visualization -->
+  <text x="55" y="180" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Total Parameters</text>
+  
+  <!-- DeepSeek circle -->
+  <circle cx="250" cy="240" r="100" fill="url(#deepseek-pattern)" stroke="#182848" stroke-width="2" />
+  <text x="250" y="240" font-family="Arial, sans-serif" font-size="22" font-weight="bold" text-anchor="middle" fill="white">671B</text>
+  <text x="250" y="270" font-family="Arial, sans-serif" font-size="16" text-anchor="middle" fill="white">Parameters</text>
+  
+  <!-- Our circle -->
+  <circle cx="700" cy="240" r="40" fill="url(#our-gradient)" stroke="#11998e" stroke-width="2" />
+  <text x="700" y="235" font-family="Arial, sans-serif" font-size="18" font-weight="bold" text-anchor="middle" fill="white">100B</text>
+  <text x="700" y="255" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="white">Parameters</text>
+  
+  <!-- Connection line -->
+  <line x1="350" y1="240" x2="660" y2="240" stroke="#95a5a6" stroke-width="2" stroke-dasharray="5,5" />
+  <text x="500" y="230" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">6.7x Smaller</text>
+  
+  <!-- Active Parameters Visualization -->
+  <text x="100" y="360" font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="#333">Active Parameters Per Token</text>
+  
+  <!-- DeepSeek active -->
+  <rect x="150" y="370" width="200" height="40" rx="5" ry="5" fill="url(#deepseek-gradient)" />
+  <text x="250" y="395" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="white">37B Active Parameters</text>
+  
+  <!-- Our active -->
+  <rect x="150" y="420" width="162" height="40" rx="5" ry="5" fill="url(#our-gradient)" />
+  <text x="230" y="445" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="white">30B Active Parameters</text>
+  
+  <!-- Activation percentage -->
+  <rect x="400" y="370" width="450" height="90" rx="5" ry="5" fill="#f8f9fa" stroke="#ddd" stroke-width="1" />
+  <text x="625" y="395" font-family="Arial, sans-serif" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Parameter Activation Ratio</text>
+  
+  <rect x="450" y="410" width="55" height="30" rx="3" ry="3" fill="url(#deepseek-gradient)" />
+  <text x="510" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#333">5.5% (DeepSeek)</text>
+  
+  <rect x="600" y="410" width="150" height="30" rx="3" ry="3" fill="url(#our-gradient)" />
+  <text x="760" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="start" fill="#333">30% (Our Approach)</text>
+  
+  <!-- Training Compute Comparison -->
+  <text x="100" y="490" font-family="Arial, sans-serif" font-size="18" font-weight="bold" fill="#333">Training Compute (GPU Hours per Trillion Tokens)</text>
+  
+  <!-- Compute bars -->
+  <rect x="150" y="510" width="500" height="30" rx="5" ry="5" fill="#eee" stroke="#ddd" />
+  <rect x="150" y="510" width="480" height="30" rx="5" ry="5" fill="url(#deepseek-gradient)" />
+  <text x="640" y="530" font-family="Arial, sans-serif" font-size="14" fill="#333">180K GPU Hours (DeepSeek)</text>
+  
+  <rect x="150" y="550" width="500" height="30" rx="5" ry="5" fill="#eee" stroke="#ddd" />
+  <rect x="150" y="550" width="80" height="30" rx="5" ry="5" fill="url(#our-gradient)" />
+  <text x="240" y="570" font-family="Arial, sans-serif" font-size="14" fill="#333">~30K GPU Hours (Our Approach)</text>
+  
+  <!-- Key Innovation Callouts -->
+  <rect x="770" y="180" width="160" height="120" rx="5" ry="5" fill="#f8f9fa" stroke="#11998e" stroke-width="2" />
+  <text x="850" y="200" font-family="Arial, sans-serif" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">Key Advantages</text>
+  <text x="850" y="225" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">• 6.7x fewer parameters</text>
+  <text x="850" y="250" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">• 5-6x less compute</text>
+  <text x="850" y="275" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">• Higher activation ratio</text>
+  <text x="850" y="300" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">• Comparable performance</text>
+  
+  <!-- Footer -->
+  <text x="500" y="595" font-family="Arial, sans-serif" font-size="12" font-style="italic" text-anchor="middle" fill="#666">Jupiter HPC Research Track - EU LLM Training Project</text>
+</svg> 

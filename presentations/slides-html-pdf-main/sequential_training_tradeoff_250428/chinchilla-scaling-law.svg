@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600">
+  <!-- Background -->
+  <rect width="800" height="600" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold">Chinchilla Scaling Law: Model Size vs. Training Tokens</text>
+  
+  <!-- Axes -->
+  <line x1="100" y1="500" x2="700" y2="500" stroke="#333" stroke-width="2"/> <!-- x-axis -->
+  <line x1="100" y1="500" x2="100" y2="100" stroke="#333" stroke-width="2"/> <!-- y-axis -->
+  
+  <!-- Axis labels -->
+  <text x="400" y="550" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold">Model Size (Parameters)</text>
+  <text x="50" y="300" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" transform="rotate(-90, 50, 300)" font-weight="bold">Training Tokens</text>
+  
+  <!-- X-axis ticks and labels -->
+  <line x1="160" y1="500" x2="160" y2="510" stroke="#333" stroke-width="2"/>
+  <text x="160" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">3B</text>
+  
+  <line x1="220" y1="500" x2="220" y2="510" stroke="#333" stroke-width="2"/>
+  <text x="220" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">7B</text>
+  
+  <line x1="300" y1="500" x2="300" y2="510" stroke="#333" stroke-width="2"/>
+  <text x="300" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">20B</text>
+  
+  <line x1="380" y1="500" x2="380" y2="510" stroke="#333" stroke-width="2"/>
+  <text x="380" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">70B</text>
+  
+  <line x1="460" y1="500" x2="460" y2="510" stroke="#333" stroke-width="2"/>
+  <text x="460" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">100B</text>
+  
+  <line x1="540" y1="500" x2="540" y2="510" stroke="#333" stroke-width="2"/>
+  <text x="540" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">175B</text>
+  
+  <line x1="640" y1="500" x2="640" y2="510" stroke="#333" stroke-width="2"/>
+  <text x="640" y="530" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">540B</text>
+  
+  <!-- Y-axis ticks and labels -->
+  <line x1="90" y1="450" x2="100" y2="450" stroke="#333" stroke-width="2"/>
+  <text x="85" y="455" font-family="Arial, sans-serif" font-size="14" text-anchor="end">0.3T</text>
+  
+  <line x1="90" y1="400" x2="100" y2="400" stroke="#333" stroke-width="2"/>
+  <text x="85" y="405" font-family="Arial, sans-serif" font-size="14" text-anchor="end">0.5T</text>
+  
+  <line x1="90" y1="350" x2="100" y2="350" stroke="#333" stroke-width="2"/>
+  <text x="85" y="355" font-family="Arial, sans-serif" font-size="14" text-anchor="end">1.0T</text>
+  
+  <line x1="90" y1="300" x2="100" y2="300" stroke="#333" stroke-width="2"/>
+  <text x="85" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="end">1.5T</text>
+  
+  <line x1="90" y1="250" x2="100" y2="250" stroke="#333" stroke-width="2"/>
+  <text x="85" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="end">2.0T</text>
+  
+  <line x1="90" y1="200" x2="100" y2="200" stroke="#333" stroke-width="2"/>
+  <text x="85" y="205" font-family="Arial, sans-serif" font-size="14" text-anchor="end">2.5T</text>
+  
+  <line x1="90" y1="150" x2="100" y2="150" stroke="#333" stroke-width="2"/>
+  <text x="85" y="155" font-family="Arial, sans-serif" font-size="14" text-anchor="end">3.0T</text>
+  
+  <!-- Chinchilla optimal scaling band (20 tokens per parameter) -->
+  <path d="M160,470 C220,450 300,400 380,350 C450,300 540,250 640,150" 
+        fill="none" stroke="#3f51b5" stroke-width="3" stroke-dasharray="10,5"/>
+  <text x="350" y="320" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3f51b5" font-style="italic">Chinchilla Optimal Line</text>
+  <text x="350" y="340" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#3f51b5" font-style="italic">(~20 tokens/parameter)</text>
+  
+  <!-- Optimal region shading -->
+  <path d="M160,470 C220,450 300,400 380,350 C450,300 540,250 640,150 L640,230 C540,330 450,380 380,430 C300,480 220,490 160,490 Z" 
+        fill="#8c9eff" opacity="0.2" stroke="none"/>
+  
+  <!-- Known model markers -->
+  <circle cx="540" cy="450" r="7" fill="#e91e63" stroke="#333" stroke-width="1"/>
+  <text x="510" y="440" font-family="Arial, sans-serif" font-size="12" text-anchor="end">GPT-3 (175B, 0.3T)</text>
+  <text x="510" y="455" font-family="Arial, sans-serif" font-size="12" text-anchor="end">Undertrained</text>
+  
+  <circle cx="380" cy="300" r="7" fill="#4caf50" stroke="#333" stroke-width="1"/>
+  <text x="372" y="285" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Chinchilla</text>
+  <text x="372" y="300" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(70B, 1.4T)</text>
+  
+  <circle cx="220" cy="350" r="7" fill="#ff9800" stroke="#333" stroke-width="1"/>
+  <text x="220" y="335" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">LLaMA 2</text>
+  <text x="220" y="350" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(7B, 1.0T)</text>
+  
+  <circle cx="640" cy="300" r="7" fill="#9c27b0" stroke="#333" stroke-width="1"/>
+  <text x="670" y="300" font-family="Arial, sans-serif" font-size="12" text-anchor="start">PaLM (540B, 2.0T)</text>
+  <text x="670" y="315" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Undertrained</text>
+  
+  <!-- Partner A's experiment marker -->
+  <circle cx="460" cy="200" r="10" fill="#03a9f4" stroke="#333" stroke-width="2"/>
+  <text x="460" y="180" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Sequential Plan</text>
+  <text x="460" y="195" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">(100B, 2.5T)</text>
+  
+  <!-- Additional information box -->
+  <rect x="120" y="80" width="320" height="90" rx="5" ry="5" fill="white" stroke="#333" stroke-width="1"/>
+  <text x="130" y="105" font-family="Arial, sans-serif" font-size="14" font-weight="bold">Chinchilla Finding:</text>
+  <text x="130" y="125" font-family="Arial, sans-serif" font-size="11">Most LLMs are undertrained (below optimal line)</text>
+  <text x="130" y="145" font-family="Arial, sans-serif" font-size="11">Sequential training with 100B with 2.5T tokens is slightly above</text>
+  <text x="130" y="160" font-family="Arial, sans-serif" font-size="11">optimal, which should yield good performance</text>
+  
+  <!-- Legend -->
+  <rect x="550" y="100" width="200" height="110" rx="5" ry="5" fill="white" stroke="#333" stroke-width="1"/>
+  <text x="650" y="120" font-family="Arial, sans-serif" font-size="14" text-anchor="middle" font-weight="bold">Legend</text>
+  
+  <circle cx="570" cy="140" r="5" fill="#e91e63" stroke="#333" stroke-width="1"/>
+  <text x="580" y="145" font-family="Arial, sans-serif" font-size="12" text-anchor="start">GPT-3</text>
+  
+  <circle cx="570" cy="160" r="5" fill="#4caf50" stroke="#333" stroke-width="1"/>
+  <text x="580" y="165" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Chinchilla</text>
+  
+  <circle cx="570" cy="180" r="5" fill="#ff9800" stroke="#333" stroke-width="1"/>
+  <text x="580" y="185" font-family="Arial, sans-serif" font-size="12" text-anchor="start">LLaMA 2</text>
+  
+  <circle cx="570" cy="200" r="5" fill="#9c27b0" stroke="#333" stroke-width="1"/>
+  <text x="580" y="205" font-family="Arial, sans-serif" font-size="12" text-anchor="start">PaLM</text>
+  
+  <circle cx="655" cy="140" r="7" fill="#03a9f4" stroke="#333" stroke-width="2"/>
+  <text x="670" y="145" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Sequential Training</text>
+  
+  <line x1="655" y1="180" x2="675" y2="180" stroke="#3f51b5" stroke-width="2" stroke-dasharray="5,3"/>
+  <text x="680" y="185" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Optimal Line</text>
+  
+  <rect x="655" y="195" width="15" height="10" fill="#8c9eff" opacity="0.4"/>
+  <text x="680" y="205" font-family="Arial, sans-serif" font-size="12" text-anchor="start">Optimal Region</text>
+</svg>

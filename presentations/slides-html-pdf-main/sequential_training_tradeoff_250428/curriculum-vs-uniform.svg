@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  <text x="400" y="40" font-family="Arial, sans-serif" font-size="24" text-anchor="middle" font-weight="bold">Curriculum vs. Uniform Training Comparison</text>
+  
+  <!-- Axes -->
+  <line x1="100" y1="400" x2="700" y2="400" stroke="#333" stroke-width="2"/> <!-- x-axis -->
+  <line x1="100" y1="400" x2="100" y2="100" stroke="#333" stroke-width="2"/> <!-- y-axis -->
+  
+  <!-- Axis labels -->
+  <text x="400" y="440" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" font-weight="bold">Training Tokens</text>
+  <text x="50" y="250" font-family="Arial, sans-serif" font-size="18" text-anchor="middle" transform="rotate(-90, 50, 250)" font-weight="bold">Loss</text>
+  
+  <!-- X-axis ticks and labels -->
+  <line x1="100" y1="400" x2="100" y2="410" stroke="#333" stroke-width="2"/>
+  <text x="100" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">0</text>
+  
+  <line x1="200" y1="400" x2="200" y2="410" stroke="#333" stroke-width="2"/>
+  <text x="200" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">0.5T</text>
+  
+  <line x1="300" y1="400" x2="300" y2="410" stroke="#333" stroke-width="2"/>
+  <text x="300" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">1.0T</text>
+  
+  <line x1="400" y1="400" x2="400" y2="410" stroke="#333" stroke-width="2"/>
+  <text x="400" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">1.5T</text>
+  
+  <line x1="500" y1="400" x2="500" y2="410" stroke="#333" stroke-width="2"/>
+  <text x="500" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">2.0T</text>
+  
+  <line x1="600" y1="400" x2="600" y2="410" stroke="#333" stroke-width="2"/>
+  <text x="600" y="430" font-family="Arial, sans-serif" font-size="14" text-anchor="middle">2.5T</text>
+  
+  <!-- Y-axis ticks and labels (lower is better for loss) -->
+  <line x1="90" y1="350" x2="100" y2="350" stroke="#333" stroke-width="2"/>
+  <text x="85" y="355" font-family="Arial, sans-serif" font-size="14" text-anchor="end">3.0</text>
+  
+  <line x1="90" y1="300" x2="100" y2="300" stroke="#333" stroke-width="2"/>
+  <text x="85" y="305" font-family="Arial, sans-serif" font-size="14" text-anchor="end">2.5</text>
+  
+  <line x1="90" y1="250" x2="100" y2="250" stroke="#333" stroke-width="2"/>
+  <text x="85" y="255" font-family="Arial, sans-serif" font-size="14" text-anchor="end">2.0</text>
+  
+  <line x1="90" y1="200" x2="100" y2="200" stroke="#333" stroke-width="2"/>
+  <text x="85" y="205" font-family="Arial, sans-serif" font-size="14" text-anchor="end">1.5</text>
+  
+  <line x1="90" y1="150" x2="100" y2="150" stroke="#333" stroke-width="2"/>
+  <text x="85" y="155" font-family="Arial, sans-serif" font-size="14" text-anchor="end">1.0</text>
+  
+  <!-- Stage markers for sequential training -->
+  <line x1="200" y1="100" x2="200" y2="400" stroke="#888" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="200" y="115" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">End HC</text>
+  
+  <line x1="400" y1="100" x2="400" y2="400" stroke="#888" stroke-width="1" stroke-dasharray="5,5"/>
+  <text x="400" y="115" font-family="Arial, sans-serif" font-size="12" text-anchor="middle" fill="#333">End MC</text>
+  
+  <!-- Loss curves -->
+  <!-- Sequential (curriculum) training -->
+  <path d="M100,350 C150,320 180,300 200,290 L200,290 C250,280 280,275 300,272 C350,268 380,260 400,255 L400,255 C450,240 500,225 550,190 C575,175 590,160 600,150" 
+        fill="none" stroke="#d32f2f" stroke-width="3"/>
+  <text x="180" y="268" font-family="Arial, sans-serif" font-size="12" fill="#d32f2f">HC Phase</text>
+  <text x="350" y="245" font-family="Arial, sans-serif" font-size="12" fill="#d32f2f">MC Phase</text>
+  <text x="525" y="160" font-family="Arial, sans-serif" font-size="12" fill="#d32f2f">LC Phase</text>
+  
+  <!-- Uniform training -->
+  <path d="M100,350 C150,320 200,295 250,275 C300,255 350,235 400,215 C450,195 500,180 550,170 C575,165 590,160 600,155" 
+        fill="none" stroke="#2e7d32" stroke-width="3"/>
+  
+  <!-- Benefit/penalty regions -->
+  <path d="M400,255 L400,215 L550,170 L550,190 Z" fill="#2e7d32" opacity="0.2"/>
+  <text x="450" y="220" font-family="Arial, sans-serif" font-size="11" text-anchor="middle">Uniform Benefit</text>
+  
+  <path d="M550,190 L550,170 L600,155 L600,150 Z" fill="#d32f2f" opacity="0.2"/>
+  <text x="630" y="180" font-family="Arial, sans-serif" font-size="12" text-anchor="middle">Curriculum Benefit</text>
+  
+  <!-- Legend -->
+  <rect x="550" y="350" width="200" height="80" rx="5" ry="5" fill="white" stroke="#333" stroke-width="1"/>
+  <line x1="570" y1="375" x2="600" y2="375" stroke="#d32f2f" stroke-width="3"/>
+  <text x="610" y="380" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Sequential Training</text>
+  <line x1="570" y1="405" x2="600" y2="405" stroke="#2e7d32" stroke-width="3"/>
+  <text x="610" y="410" font-family="Arial, sans-serif" font-size="14" text-anchor="start">Uniform Training</text>
+  
+  <!-- Annotation box -->
+  <rect x="100" y="440" width="255" height="50" rx="5" ry="5" fill="#fff3e0" stroke="#e65100" stroke-width="1"/>
+  <text x="110" y="450" font-family="Arial, sans-serif" font-size="12" fill="#e65100">Schaefer et al. (2024) Finding:</text>
+  <text x="110" y="470" font-family="Arial, sans-serif" font-size="12" fill="#e65100">For real-world data distributions, uniform</text>
+  <text x="110" y="485" font-family="Arial, sans-serif" font-size="12" fill="#e65100">mixing often outperformed scheduled training.</text>
+</svg>

@@ -1,0 +1,113 @@
+<svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="800" height="500" fill="#f8f9fa" rx="10" ry="10"/>
+  
+  <!-- Title -->
+  <text x="400" y="40" font-family="Arial" font-size="24" font-weight="bold" text-anchor="middle" fill="#333">Distillation-Augmented PPO (DA-PPO) Algorithm</text>
+  
+  <!-- Student Model -->
+  <rect x="350" y="70" width="100" height="60" fill="#b3d1ff" stroke="#1C3E76" stroke-width="2" rx="8" ry="8"/>
+  <text x="400" y="105" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Student</text>
+  
+  <!-- Generate -->
+  <rect x="350" y="150" width="100" height="40" fill="#b3d1ff" stroke="#1C3E76" stroke-width="2" rx="5" ry="5"/>
+  <text x="400" y="175" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Generate</text>
+  
+  <!-- Student to Generate arrow -->
+  <line x1="400" y1="130" x2="400" y2="150" stroke="#1C3E76" stroke-width="1.5"/>
+  <polygon points="400,150 395,140 405,140" fill="#1C3E76"/>
+  
+  <!-- Reward Calculation -->
+  <rect x="200" y="220" width="140" height="40" fill="#fff8e1" stroke="#ffa000" stroke-width="2" rx="5" ry="5"/>
+  <text x="270" y="245" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Task Reward R_task</text>
+  
+  <!-- Generate to Reward arrow -->
+  <line x1="400" y1="190" x2="400" y2="205" stroke="#666" stroke-width="1.5"/>
+  <line x1="400" y1="205" x2="270" y2="205" stroke="#666" stroke-width="1.5"/>
+  <line x1="270" y1="205" x2="270" y2="220" stroke="#666" stroke-width="1.5"/>
+  <polygon points="270,220 265,210 275,210" fill="#666"/>
+  
+  <!-- Teacher Model -->
+  <rect x="470" y="120" width="140" height="40" fill="#fceaff" stroke="#8e44ad" stroke-width="2" rx="5" ry="5"/>
+  <text x="540" y="145" font-family="Arial" font-size="14" font-weight="bold" text-anchor="middle" fill="#333">Teacher Model</text>
+  
+  <!-- KL Calculation -->
+  <rect x="470" y="220" width="140" height="40" fill="#fceaff" stroke="#8e44ad" stroke-width="2" rx="5" ry="5"/>
+  <text x="540" y="245" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Teacher KL Term</text>
+  
+  <!-- Teacher to KL arrow -->
+  <line x1="540" y1="160" x2="540" y2="220" stroke="#8e44ad" stroke-width="1.5"/>
+  <polygon points="540,220 535,210 545,210" fill="#8e44ad"/>
+  
+  <!-- Generate to KL arrow -->
+  <line x1="400" y1="190" x2="400" y2="205" stroke="#666" stroke-width="1.5"/>
+  <line x1="400" y1="205" x2="540" y2="205" stroke="#666" stroke-width="1.5"/>
+  <line x1="540" y1="205" x2="540" y2="220" stroke="#666" stroke-width="1.5"/>
+  <polygon points="540,220 535,210 545,210" fill="#666"/>
+  
+  <!-- Reference Model -->
+  <rect x="600" y="170" width="140" height="40" fill="#e6f2ff" stroke="#3771c8" stroke-width="2" rx="5" ry="5"/>
+  <text x="670" y="195" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Reference Model</text>
+  
+  <!-- Reference KL Term -->
+  <rect x="600" y="270" width="140" height="40" fill="#e6f2ff" stroke="#3771c8" stroke-width="2" rx="5" ry="5"/>
+  <text x="670" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Reference KL Term</text>
+  
+  <!-- Reference to Ref KL arrow -->
+  <line x1="670" y1="210" x2="670" y2="270" stroke="#3771c8" stroke-width="1.5"/>
+  <polygon points="670,270 665,260 675,260" fill="#3771c8"/>
+  
+  <!-- Value Network -->
+  <rect x="70" y="170" width="140" height="40" fill="#e6f2ff" stroke="#3771c8" stroke-width="2" rx="5" ry="5"/>
+  <text x="140" y="195" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Value Network</text>
+  
+  <!-- Advantage Calculation -->
+  <rect x="70" y="270" width="140" height="40" fill="#e6f2ff" stroke="#3771c8" stroke-width="2" rx="5" ry="5"/>
+  <text x="140" y="295" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">Advantage A(s,a)</text>
+  
+  <!-- Value to Advantage arrow -->
+  <line x1="140" y1="210" x2="140" y2="270" stroke="#3771c8" stroke-width="1.5"/>
+  <polygon points="140,270 135,260 145,260" fill="#3771c8"/>
+  
+  <!-- Generate to Value arrow -->
+  <line x1="400" y1="170" x2="210" y2="170" stroke="#666" stroke-width="1.5"/>
+  <line x1="210" y1="170" x2="210" y2="170" stroke="#666" stroke-width="1.5"/>
+  <polygon points="210,170 220,165 220,175" fill="#666"/>
+  
+  <!-- PPO Loss -->
+  <rect x="200" y="320" width="140" height="40" fill="#e6f2ff" stroke="#3771c8" stroke-width="2" rx="5" ry="5"/>
+  <text x="270" y="345" font-family="Arial" font-size="14" text-anchor="middle" fill="#333">PPO Loss</text>
+  
+  <!-- Advantage to PPO arrow -->
+  <line x1="140" y1="310" x2="140" y2="340" stroke="#666" stroke-width="1.5"/>
+  <line x1="140" y1="340" x2="200" y2="340" stroke="#666" stroke-width="1.5"/>
+  <polygon points="200,340 190,335 190,345" fill="#666"/>
+  
+  <!-- Reward to PPO arrow -->
+  <line x1="270" y1="260" x2="270" y2="320" stroke="#ffa000" stroke-width="1.5"/>
+  <polygon points="270,320 265,310 275,310" fill="#ffa000"/>
+  
+  <!-- Total Loss -->
+  <rect x="350" y="380" width="100" height="60" fill="#e8f5e9" stroke="#388e3c" stroke-width="2" rx="8" ry="8"/>
+  <text x="400" y="410" font-family="Arial" font-size="16" font-weight="bold" text-anchor="middle" fill="#333">Total Loss</text>
+  
+  <!-- PPO to Total arrow -->
+  <line x1="270" y1="360" x2="270" y2="410" stroke="#666" stroke-width="1.5"/>
+  <line x1="270" y1="410" x2="350" y2="410" stroke="#666" stroke-width="1.5"/>
+  <polygon points="350,410 340,405 340,415" fill="#666"/>
+  
+  <!-- Teacher KL to Total arrow -->
+  <line x1="540" y1="260" x2="540" y2="410" stroke="#666" stroke-width="1.5"/>
+  <line x1="540" y1="410" x2="450" y2="410" stroke="#666" stroke-width="1.5"/>
+  <polygon points="450,410 460,405 460,415" fill="#666"/>
+  
+  <!-- Reference KL to Total arrow -->
+  <line x1="670" y1="310" x2="670" y2="410" stroke="#666" stroke-width="1.5"/>
+  <line x1="670" y1="410" x2="450" y2="410" stroke="#666" stroke-width="1.5"/>
+  <polygon points="450,410 460,405 460,415" fill="#666"/>
+  
+  <!-- Update Student -->
+  <line x1="400" y1="380" x2="400" y2="70" stroke="#388e3c" stroke-width="2" stroke-dasharray="10,5"/>
+  <polygon points="400,70 395,80 405,80" fill="#388e3c"/>
+  <text x="405" y="230" font-family="Arial" font-size="14" font-weight="bold" text-anchor="start" fill="#388e3c">Update θ</text>
+</svg>
