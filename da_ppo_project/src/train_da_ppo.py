@@ -5,17 +5,77 @@ import torch
 import wandb
 import logging
 from tqdm import tqdm
-from transformers import AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
+from transformers import set_seed,AutoTokenizer, AutoModelForCausalLM, BitsAndBytesConfig
 from datasets import load_dataset
 from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
-from trl import PPOTrainer, PPOConfig, AutoModelForCausalLMWithValueHead, set_seed
 
+from transformers import set_seed # Import set_seed from transformers instead
+from trl import PPOTrainer, PPOConfig, AutoModelForCausalLMWithValueHead
 from reward_utils import calculate_da_reward # Import the DA reward function
-from typing import Optional # Added for type hinting
+from typing import Optional, Dict, List, Any # Added for type hinting
+from dataclasses import dataclass # Added for custom collator
+from transformers import PreTrainedTokenizerBase # Added for custom collator
 
 # Setup logging
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
+
+
+@dataclass
+class CustomPPODataCollator:
+    """
+    Data collator specifically for PPO training that handles padding for input_ids
+    and attention_mask, while keeping other fields (like 'query' strings) as lists.
+    """
+    tokenizer: PreTrainedTokenizerBase
+
+    def __call__(self, features: List[Dict[str, Any]]) -> Dict[str, Any]:
+        batch = {}
+
+        # Handle numerical fields (like input_ids, attention_mask) using tokenizer.pad
+        # First, identify keys that should be padded
+        keys_to_pad = []
+        if "input_ids" in features[0]:
+            keys_to_pad.append("input_ids")
+        if "attention_mask" in features[0]:
+            keys_to_pad.append("attention_mask")
+            
+        # Create a temporary list of dicts containing only the fields to pad
+        features_to_pad = [{k: feature[k] for k in keys_to_pad} for feature in features if all(k in feature for k in keys_to_pad)]
+
+        if not features_to_pad:
+             # This might happen if the tokenization step failed for all items in the batch
+             # Return an empty batch or handle as appropriate
+             print("Warning: No features to pad found in the batch.")
+             # Need to return something conforming to expected structure, even if empty
+             # or handle the case where the batch might be empty upstream.
+             # Let's return empty tensors/lists for now, but this might need refinement.
+             return {"input_ids": torch.empty(0, 0, dtype=torch.long), 
+                     "attention_mask": torch.empty(0, 0, dtype=torch.long),
+                     "query": []}
+
+
+        # Use tokenizer.pad for the numerical fields - pad to left for causal LM
+        # Using tokenizer.padding_side is safer if it's set (e.g., 'left' for causal)
+        padding_side = self.tokenizer.padding_side
+        padded_batch = self.tokenizer.pad(
+            features_to_pad,
+            padding='longest', # Pad to longest sequence in batch
+            pad_to_multiple_of=None, # No specific multiple needed usually
+            return_tensors="pt",
+            padding_side=padding_side 
+        )
+
+        # Add padded tensors to the final batch
+        batch.update(padded_batch)
+
+        # Handle non-numerical fields (like 'query') by simply collecting them
+        if "query" in features[0]:
+            batch["query"] = [feature["query"] for feature in features if "query" in feature]
+        # Add other non-tensor fields similarly if needed
+
+        return batch
+
 
 def load_models_and_tokenizers(config, device):
     """Loads student, teacher, and tokenizers based on config."""
@@ -77,6 +137,41 @@ def load_models_and_tokenizers(config, device):
         student_model.print_trainable_parameters()
         logger.info("LoRA applied.")
 
+    # Ensure the student model wrapper has generation_config accessible for PPOTrainer
+    if hasattr(student_model, "pretrained_model") and not hasattr(student_model, "generation_config"):
+        logger.info("Manually setting generation_config on student model wrapper from its pretrained_model.")
+        student_model.generation_config = student_model.pretrained_model.generation_config
+    elif not hasattr(student_model, "generation_config"):
+        logger.warning("Student model does not have 'generation_config' and could not find 'pretrained_model' to copy from. PPOTrainer might fail.")
+
+    # --- Fix for base_model_prefix --- >
+    # The PPOTrainer->PolicyAndValueWrapper expects the `value_model` object (which is our student_model wrapper)
+    # to have a `base_model_prefix` attribute AND the corresponding attribute that it references.
+    if not hasattr(student_model, "base_model_prefix"):
+        if hasattr(student_model, "pretrained_model") and hasattr(student_model.pretrained_model, "config") and hasattr(student_model.pretrained_model.config, "model_type"):
+            model_type = student_model.pretrained_model.config.model_type
+            # Add known prefixes here based on model type
+            if model_type == "gpt2":
+                # For GPT2, the transformer block is named "transformer"
+                student_model.base_model_prefix = "transformer"
+                # We also need to expose the actual transformer module
+                if hasattr(student_model.pretrained_model, "transformer"):
+                    # Create a reference to the actual transformer module from the pretrained model
+                    student_model.transformer = student_model.pretrained_model.transformer
+                    logger.info(f"Manually setting base_model_prefix='{student_model.base_model_prefix}' and exposing the transformer module on student model wrapper.")
+                else:
+                    logger.warning(f"Student model's pretrained_model does not have a 'transformer' attribute. PolicyAndValueWrapper will fail.")
+            # Add elif clauses for other model types if needed (e.g., "model" for Llama)
+            # elif model_type == "llama":
+            #    student_model.base_model_prefix = "model"
+            #    if hasattr(student_model.pretrained_model, "model"):
+            #        student_model.model = student_model.pretrained_model.model
+            #    logger.info(f"Manually setting base_model_prefix='{student_model.base_model_prefix}' on student model wrapper based on model_type '{model_type}'.")
+            else:
+                 logger.warning(f"Could not determine base_model_prefix for model_type '{model_type}'. Internal TRL logic might fail.")
+        else:
+             logger.warning("Could not access pretrained_model or its config to determine base_model_prefix. Internal TRL logic might fail.")
+    # < --- End Fix --- #
 
     # Load teacher model (only if in DA-PPO mode)
     teacher_model = None
@@ -203,8 +298,8 @@ def main(config_path: str, training_mode: str, run_seed: Optional[int] = None):
     # --- Initialize PPOTrainer ---
     ppo_config_dict = config['ppo_config']
     # Ensure model_name is set correctly if not using the alias (though alias should work)
-    if 'model_name' not in ppo_config_dict or ppo_config_dict['model_name'] != config['student_model_name']:
-         ppo_config_dict['model_name'] = config['student_model_name']
+    # if 'model_name' not in ppo_config_dict or ppo_config_dict['model_name'] != config['student_model_name']:
+    #      ppo_config_dict['model_name'] = config['student_model_name']
 
     # Set pad token id in generation kwargs if not already set
     gen_kwargs = config['generation_kwargs']
@@ -215,13 +310,18 @@ def main(config_path: str, training_mode: str, run_seed: Optional[int] = None):
     # Create PPOConfig object
     ppo_config_obj = PPOConfig(**ppo_config_dict)
 
+    # Instantiate the custom data collator
+    data_collator = CustomPPODataCollator(tokenizer=student_tokenizer)
+
     ppo_trainer = PPOTrainer(
-        config=ppo_config_obj,
-        model=student_model, # Pass the potentially PEFT-wrapped model
-        ref_model=None, # PPOTrainer creates ref model automatically if None
-        tokenizer=student_tokenizer,
-        dataset=tokenized_dataset, # Pass the tokenized dataset
-        data_collator=None # PPOTrainer handles collation internally
+        args=ppo_config_obj,             # Use 'args' instead of 'config'
+        model=student_model,            # Pass the AutoModelForCausalLMWithValueHead here
+        ref_model=None,                 # PPOTrainer creates ref model automatically if None
+        reward_model=teacher_model,       # Pass teacher model here (required argument)
+        value_model=student_model,        # Pass the combined model also as value_model
+        processing_class=student_tokenizer, # Use 'processing_class' instead of 'tokenizer'
+        train_dataset=tokenized_dataset, # Use 'train_dataset' instead of 'dataset'
+        data_collator=data_collator       # Pass the custom data collator instance
     )
 
     # --- WandB Initialization (Optional) ---
@@ -272,9 +372,11 @@ def main(config_path: str, training_mode: str, run_seed: Optional[int] = None):
             # Generate responses from student model
             # Use accelerator device for generation context if needed
             # with ppo_trainer.accelerator.autocast(): # Maybe needed for mixed precision
-            response_tensors = ppo_trainer.generate(
+            response_tensors = ppo_trainer.model.policy.generate(
                 query_tensors,       # Pass the list of tensors
-                return_prompt=False, # We only want the generated part
+                # Note: PPOTrainer's internal generation might handle prompt inclusion differently.
+                # We pass the prompt tensor, the model generate method usually handles this.
+                # Ensure generation_kwargs doesn't conflict.
                 length_sampler=None, # Use generation_kwargs instead
                 **gen_kwargs,
             )
@@ -296,9 +398,10 @@ def main(config_path: str, training_mode: str, run_seed: Optional[int] = None):
 
                 # Calculate DA reward
                 try:
+                    # Pass TENSORS to the reward function
                     rewards_list = calculate_da_reward(
-                        prompts=prompt_strings, # Pass original prompt strings
-                        student_responses=batch['response'],
+                        prompts_input_ids=query_tensors,    # Pass prompt token IDs
+                        student_sequences=response_tensors, # Pass full generated sequence tensors
                         teacher_model=teacher_model,
                         teacher_tokenizer=teacher_tokenizer,
                         lambda_da=config['lambda_da'],
@@ -310,9 +413,9 @@ def main(config_path: str, training_mode: str, run_seed: Optional[int] = None):
                         ll_batch_size=config.get('reward_ll_batch_size', 4) # Configurable batch size
                     )
                 except Exception as e:
-                    logger.error(f"Error in calculate_da_reward at step {current_step}: {e}")
+                    logger.error(f"Error in calculate_da_reward at step {current_step}: {e}", exc_info=True) # Added exc_info
                     # Handle error, e.g., assign zero reward for the batch
-                    rewards_list = [0.0] * len(prompt_strings)
+                    rewards_list = [0.0] * len(query_tensors) # Use tensor length
 
             elif training_mode == 'baseline':
                 # Baseline: Zero reward or a fixed small reward

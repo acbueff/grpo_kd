@@ -1,0 +1,74 @@
+# Model Configuration
+student_model_name: &student_model "gpt2" # Example: "meta-llama/Llama-2-7b-hf"
+teacher_model_name: &teacher_model "gpt2-large" # Using gpt2-large as recommended ~1B teacher
+use_lora: false # Disable LoRA for simplicity on small models
+# lora_config: # Commented out as use_lora is false
+#   r: 16
+#   lora_alpha: 32
+#   lora_dropout: 0.05
+#   bias: "none"
+#   task_type: "CAUSAL_LM"
+
+# Dataset Configuration
+dataset_name: "databricks/databricks-dolly-15k" # Dataset for prompts
+prompt_column: "instruction" # Column containing the prompts
+max_prompt_length: 512 # Max length for prompts
+dataset_subset_size: 500 # Use a small subset for quick testing
+
+# PPO Configuration (trl.PPOConfig)
+ppo_config:
+  learning_rate: 1.41e-5
+  batch_size: 16 # Reduced for smaller GPU
+  mini_batch_size: 4 # Should divide batch_size
+  gradient_accumulation_steps: 4 # batch_size = mini_batch_size * gradient_accumulation_steps (16 = 4 * 4)
+  num_ppo_epochs: 1 # Reduced number of optimisation epochs per batch for speed
+  seed: 42
+
+# DA-PPO Specific Configuration
+da_reward_type: "log_likelihood" # Options: "log_likelihood", "kl_divergence", "reward_model"
+lambda_da: 0.8 # Weight for the distillation reward (intrinsic reward weight = 1 - lambda_da)
+intrinsic_reward_weight: 0.2 # Explicit weight for non-DA reward (set to 0 if DA is the only reward)
+
+# Generation Configuration
+generation_kwargs:
+  max_new_tokens: 50 # Reduced for faster rollouts
+  min_length: -1 # do not override the model config
+  top_k: 0
+  top_p: 1.0
+  do_sample: true
+  pad_token_id: 50256 # Specify the pad token id for the student model tokenizer (GPT-2 EOS)
+  temperature: 0.9
+
+# Training Configuration
+num_train_epochs: 1 # Reduced for quick test run
+max_steps: -1 # Overrides epochs if > 0
+save_steps: 100 # Save model every N steps
+logging_steps: 10 # Log metrics every N steps
+output_dir: "models/da_ppo_student_small_test" # Specific output dir for this test
+project_name: "da-ppo-small-test" # WandB project name for this test
+
+# Evaluation Configuration (used by evaluate_models.py)
+evaluation_datasets: [] # Disable evaluation for the initial test run
+#   - name: "truthful_qa_gen"
+#     path: "truthful_qa"
+#     config_name: "generation"
+#     prompt_col: "question"
+#     split: "validation"
+#     subset_size: 50 # Take a subset for faster eval
+#   - name: "gsm8k_main"
+#     path: "gsm8k"
+#     config_name: "main"
+#     prompt_col: "question"
+#     split: "test"
+#     subset_size: 50
+
+evaluation_metrics: [] # Disable evaluation metrics
+#  - "accuracy" # For QA/Math/Code
+#  - "rouge" # For text generation (needs references or use vs teacher?)
+#  - "perplexity" # Needs baseline model
+
+eval_batch_size: 8
+
+# Statistical Analysis Configuration
+num_runs: 1 # Run only once for the initial test
+significance_level: 0.05

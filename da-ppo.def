@@ -1,0 +1,70 @@
+# Definition file for DA-PPO Project: da-ppo.def
+
+Bootstrap: docker
+From: nvidia/cuda:12.1.1-devel-ubuntu22.04
+# Using CUDA 12.1 base image, compatible with recent PyTorch/Transformers
+# The 'devel' image includes compilers needed for pip installs
+
+%post
+    # Set noninteractive frontend to avoid prompts during apt installs
+    export DEBIAN_FRONTEND=noninteractive
+
+    # Update and install system dependencies
+    apt-get update && apt-get install -y --no-install-recommends \
+        python3.10 \
+        python3.10-venv \
+        python3-pip \
+        git \
+        && rm -rf /var/lib/apt/lists/*
+
+    # Make python3.10 the default python/python3
+    update-alternatives --install /usr/bin/python python /usr/bin/python3.10 1 && \
+    update-alternatives --install /usr/bin/python3 python3 /usr/bin/python3.10 1
+
+    # Upgrade pip
+    python -m pip install --no-cache-dir --upgrade pip
+
+    # Install Python dependencies from requirements.txt
+    # The path /app/da_ppo_project/requirements.txt assumes the %files section below
+    python -m pip install --no-cache-dir -r /app/da_ppo_project/requirements.txt
+
+    # Install TRL v0.14.0 from source for GRPO support
+    echo "Cloning TRL repository..."
+    git clone https://github.com/huggingface/trl.git /tmp/trl-source
+    cd /tmp/trl-source
+    echo "Checking out TRL tag v0.14.0..."
+    git checkout v0.14.0
+    echo "Installing TRL from source..."
+    python -m pip install --no-cache-dir .
+    echo "TRL installation complete. Cleaning up..."
+    cd /
+    rm -rf /tmp/trl-source
+
+    # Optionally, install any other specific tools if needed
+    # e.g., apt-get install -y language-tool for grammatical_error_rate
+
+%files
+    # Copy your project directory into the container at /app/da_ppo_project
+    # This assumes you run 'apptainer build' from the WP5-KD-GRPO directory
+    da_ppo_project /app/da_ppo_project
+
+%environment
+    # Set environment variables needed at runtime
+    export NVIDIA_VISIBLE_DEVICES=all
+    export NVIDIA_DRIVER_CAPABILITIES=compute,utility
+
+    # Add project source to PYTHONPATH if needed (though often not necessary if running scripts directly)
+    # export APPTAINERENV_PYTHONPATH="/app/da_ppo_project:\$PYTHONPATH"
+    # Using APPTAINERENV_ prefix makes it automatically available outside container shell
+
+%runscript
+    # Default command executed when you run 'apptainer run da-ppo.sif'
+    echo "DA-PPO Apptainer Container"
+    echo "Usage: apptainer exec da-ppo.sif <command>"
+    echo "Example: apptainer exec --nv da-ppo.sif python /app/da_ppo_project/src/train_da_ppo.py ..."
+    exec python --version
+
+%labels
+    Author Andreas
+    Version 1.0
+    Description "Container for running DA-PPO experiments"

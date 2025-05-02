@@ -16,19 +16,12 @@ max_prompt_length: 512 # Max length for prompts
 
 # PPO Configuration (trl.PPOConfig)
 ppo_config:
-  model_name: *student_model
   learning_rate: 1.41e-5
-  log_with: "wandb" # or None or "tensorboard"
   batch_size: 64
   mini_batch_size: 4 # Should divide batch_size
   gradient_accumulation_steps: 4 # batch_size = mini_batch_size * gradient_accumulation_steps
-  optimize_cuda_cache: true
-  early_stopping: false
-  target_kl: 6.0 # Target KL divergence
-  ppo_epochs: 4 # Number of optimisation epochs per batch of samples
+  num_ppo_epochs: 4 # Number of optimisation epochs per batch of samples
   seed: 42
-  init_kl_coef: 0.2
-  adap_kl_ctrl: true
 
 # DA-PPO Specific Configuration
 da_reward_type: "log_likelihood" # Options: "log_likelihood", "kl_divergence", "reward_model"

@@ -1,13 +1,30 @@
-torch
-transformers>=4.30.0
-trl>=0.8.6
+# Core Dependencies
+torch>=2.0.0
+transformers>=4.38.0 # Updated for newer TRL compatibility potentially
+# trl>=0.8.6 # Removed, will install v0.14.0 from source
 datasets>=2.10.0
+accelerate>=0.25.0 # Generally needed with recent transformers/trl
+peft>=0.7.0 # Needed for LoRA
+pyyaml>=6.0
+safetensors>=0.4.3 # Required by trl v0.14.0
+dacite # Required by trl v0.14.0
+tyro # Required by trl v0.14.0
+tensorboardX # Required by trl v0.14.0
+
+# Common Utilities
+tqdm>=4.60.0
+numpy>=1.20.0
+pandas>=1.3.0
+scipy>=1.8.0
+
+# Evaluation
 evaluate>=0.4.0
-accelerate>=0.20.0
-peft>=0.7.0
-scipy
-numpy
-pyyaml
-tqdm
-wandb # Optional, for logging
-# language_tool_python # Optional, for GER metric - requires Java
+
+# Optional Quantization
+bitsandbytes>=0.41.0 # Needed if load_in_4bit/8bit is true
+
+# Optional Logging
+wandb>=0.15.0
+
+# Optional Metrics (often require extra setup)
+# language_tool_python # Needs Java for grammatical_error_rate
